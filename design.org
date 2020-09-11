@@ -1,0 +1,32 @@
+#+OPTIONS: toc:nil
+
+* Design
+** user-login-logout-monitor
+A script that is run on the cluster node, which returns the following data:
+in the last 24hrs
+
+#+BEGIN_SRC
+user-name-1 <num-mins-logged-in>
+user-name-2 <num-mins-logged-in>
+#+END_SRC
+
+** system-param-monitor
+A script that is run on the cluster node, which returns the following data:
+
+- CPU usage
+#+BEGIN_SRC
+<time-stamp-1> <idle%>
+<time-stamp-2> <idle%>
+#+END_SRC
+
+- Memory usage
+#+BEGIN_SRC
+<time-stamp-1> <commit%>
+<time-stamp-2> <commit%>
+#+END_SRC
+
+** Viewer-script
+The ~user-login-logout-monitor~ and ~system-param-monitor~ will dumpt the data in a pre-determined directory. This script parses the data and presents neatly compiled reports.
+
+** Cron-script
+Runs ~user-login-logout-monitor~ and ~system-param-monitor~ periodically using the secure-shell (ssh) on cluster machines given in a /machinefile/.
