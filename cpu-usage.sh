@@ -1,4 +1,7 @@
 #!/bin/sh
 
-# Placeholder code for now.
-ssh "${1}" "sar -1" | sed -e 's/\(.*Average.*\)\|\(.*CPU.*\)//g' -e '/^$/d' -e 's/\(^[0-9].*:[0-9]\{2\}\) \([AP]M\) \([a-zA-Z]\{3\}\)/\1-\2-\3/g'
+ssh "${1}" "LC_TIME='POSIX' sar -1" | \
+    sed -e 's/\(.*Average.*\)//g' \
+        -e 's/\(.*CPU.*\)//g' \
+	-e '/^$/d' | \
+    awk 'OFS="," {print $1,100-$8}'
