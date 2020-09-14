@@ -16,4 +16,5 @@ do
     bash cpu-usage.sh "${HOST}" > "${HOSTPATH}"/cpu-usage.csv;
     bash all_normal_users.sh "${HOST}" > "${HOSTPATH}"/all_normal_users.csv;
     bash mem-usage.sh "${HOST}" > "${HOSTPATH}"/mem-usage.csv;
+    bash last_login_info.sh "${HOST}" > "${HOSTPATH}"/last_login_info.txt
 done < "${MACHINEFILE}"
