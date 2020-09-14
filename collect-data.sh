@@ -15,4 +15,5 @@ do
     echo "Collecting from ${HOST}";
     bash cpu-usage.sh "${HOST}" > "${HOSTPATH}"/cpu-usage.csv;
     bash all_normal_users.sh "${HOST}" > "${HOSTPATH}"/all_normal_users.csv;
+    bash mem-usage.sh "${HOST}" > "${HOSTPATH}"/mem-usage.csv;
 done < "${MACHINEFILE}"
