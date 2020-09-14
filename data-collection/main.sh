@@ -1,8 +1,7 @@
 #!/bin/sh
 
-MACHINEFILE="${1}"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-
+MACHINEFILE="${DIR}"/../config/machinefile
 
 if ! [ -f "${1}" ]; then
     mkdir -p /tmp/lmon
@@ -12,7 +11,7 @@ fi
 
 while read HOST
 do
-    HOSTPATH="${HOME}"/.lmon/log/"${HOST}/$(date '+%d-%m-%Y')"
+    HOSTPATH="${HOME}"/.lmon/log/"$(date '+%d-%m-%Y')/${HOST}"
     mkdir -p "${HOSTPATH}";
     echo "Collecting from ${HOST}";
     bash "${DIR}"/utils/cpu-usage.sh "${HOST}" > "${HOSTPATH}"/cpu-usage.csv;
