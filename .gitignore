@@ -1,3 +1,2 @@
-# Ignore the report data folder
-data/
-*.rpt
+# Ignore the log files
+log/
