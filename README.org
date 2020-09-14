@@ -1,2 +1,19 @@
 * lmon
 This is a light-weight system monitoring tool for cluster machines.
+
+* Installation
+** TODO Monitoring machine
+*** Dependencies
+
+
+** Cluster machine
+*** Dependencies
+1) Install dependencies by running the command  ~$ sudo apt install openssh-server sysstat~
+
+2) Check if the sadc is allowed to collect system activity information.
+   - change the ~ENABLED~ variable in ~/etc/default/sysstat~ file to "=true="
+   - Restart sysstat: ~$ sudo service sysstat restart~
+
+*** Enable remote ~ssh~ logins without password
+1) Copy the /monitoring/ server's ssh-public key and append it to the =~/.ssh/authorized_keys= file in the cluster machine.
+
