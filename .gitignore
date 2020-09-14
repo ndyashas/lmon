@@ -1,0 +1,6 @@
+# Ignore the report data folder
+data/
+*.rpt
+
+# Ignore the machinefile
+machinefile
