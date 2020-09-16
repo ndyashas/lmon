@@ -3,11 +3,11 @@ This is a light-weight system monitoring tool for cluster machines.
 
 * Installation
 ** Monitoring machine
-1) Clone this repository to your $HOME/.lmon directory.
+1) Clone this repository to your =$HOME/.lmon= directory.
 
-2) Configure/update the =machinefile= located at $HOME/.lmon/config/machinefile. You will have to add new machine IPs in a new line.
+2) Configure/update the =machinefile= located at =$HOME/.lmon/config/machinefile=. You will have to add new machine IPs in a new line.
 
-3) Setup a cron job (Optional) to collect data from all of the machines listed in the machinefile. You may run the command =$ crontab -l= to see the current cron jobs, and append the contents of the =$HOME/.lmon/data-collection/main.cron=. Or if you donont have any of your personal cron jobs setup, you may setup the job directly by running the command =$ crontab $HOME/.lmon/data-collection/main.cron=.
+3) Setup a cron job *(Optional)* to collect data from all of the machines listed in the machinefile. You may run the command =$ crontab -l= to see the current cron jobs, and append the contents of the =$HOME/.lmon/data-collection/main.cron=. Or if you donont have any of your personal cron jobs setup, you may setup the job directly by running the command =$ crontab $HOME/.lmon/data-collection/main.cron=.
 
 ** Cluster machines
 1) Install dependencies by running the command  ~$ sudo apt install openssh-server sysstat~
