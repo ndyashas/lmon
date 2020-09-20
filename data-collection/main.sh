@@ -1,20 +1,14 @@
 #!/bin/sh
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-MACHINEFILE="${DIR}"/../config/machinefile
-
-if ! [ -f "${1}" ]; then
-    mkdir -p /tmp/lmon
-    echo "$(whoami)@127.0.0.1" > /tmp/lmon/temp-machinefile
-    MACHINEFILE=/tmp/lmon/temp-machinefile
-fi
+DIR="${HOME}"/.lmon
+MACHINEFILE="${DIR}"/config/machinefile
 
 while read HOST
 do
-    HOSTPATH="${HOME}"/.lmon/log/"$(date '+%d-%m-%Y')/${HOST}"
+    HOSTPATH="${DIR}"/log/"$(date '+%d-%m-%Y')/${HOST}"
     mkdir -p "${HOSTPATH}";
     echo "Collecting from ${HOST}";
-    bash "${DIR}"/utils/cpu-usage.sh "${HOST}" > "${HOSTPATH}"/cpu-usage.csv;
-    bash "${DIR}"/utils/mem-usage.sh "${HOST}" > "${HOSTPATH}"/mem-usage.csv;
-    bash "${DIR}"/utils/last-login-info.sh "${HOST}" > "${HOSTPATH}"/last_login_info.txt
+    bash "${DIR}"/data-collection/utils/cpu-usage.sh "${HOST}" > "${HOSTPATH}"/cpu-usage.csv;
+    bash "${DIR}"/data-collection/utils/mem-usage.sh "${HOST}" > "${HOSTPATH}"/mem-usage.csv;
+    bash "${DIR}"/data-collection/utils/last-login-info.sh "${HOST}" > "${HOSTPATH}"/last_login_info.txt
 done < "${MACHINEFILE}"
