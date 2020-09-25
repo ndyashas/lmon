@@ -3,6 +3,8 @@ import datetime
 import argparse
 
 import logins
+import plot_cpu_utilization
+import plot_mem_utilization
 
 if (__name__ == "__main__"):
     parser = argparse.ArgumentParser(description='lmon data visualization')
@@ -35,7 +37,10 @@ if (__name__ == "__main__"):
         logins.display_logins(log_file_dir)
 
     elif args.mem:
-        pass
+        plot_mem_utilization.display_mem_utilization(log_file_dir)
+
+    elif args.cpu:
+        plot_cpu_utilization.display_cpu_utilization(log_file_dir)
 
     else:
         pass
