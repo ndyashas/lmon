@@ -49,7 +49,7 @@ def display_mem_utilization(log_file_dir):
         except:
             print("There was an error processing file {}".format(host_path))
 
-        plot_multiple(mem_util_percentage_list,
+    plot_multiple(mem_util_percentage_list,
                       hh_mm_list,
                       legend_label_list,
                       y_label="RAM Utilization (as %) ->",

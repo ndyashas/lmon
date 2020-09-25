@@ -49,7 +49,7 @@ def display_cpu_utilization(log_file_dir):
         except:
             print("There was an error processing file {}".format(host_path))
 
-        plot_multiple(cpu_util_percentage_list,
+    plot_multiple(cpu_util_percentage_list,
                       hh_mm_list,
                       legend_label_list,
                       y_label="CPU Utilization (as %) ->",
