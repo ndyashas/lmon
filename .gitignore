@@ -4,3 +4,6 @@ log/
 # Ignore python cache files
 __pycache__/
 *.pyc
+
+# Ignore the machine file
+config/machinefile
