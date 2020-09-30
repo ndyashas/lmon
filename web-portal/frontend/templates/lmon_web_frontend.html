@@ -27,32 +27,39 @@
 	  <h1>Systems Monitoring Portal</h1>
 	</div>
 	<div class="NumOfSystems-div">
-	  <div style="float:left;">
+	  <div style="float:left; font-style:oblique;">
 	    <p>Number of systems being monitored:</p>
 	  </div>
 	  <div id="NumOfSystems" class="orange-text"></div>
 	</div>
       </div>
 
-      <div id="system-names-container"></div>
+      <div class="main-space-div">
+	
+	<div class="system-names-titles-div">
+	  <h3>System Names & IPs</h3>
+	</div>
+	
+	<div class="system-names-container-div" id="system-names-container"></div>
 
-      <!-- Tab content -->
-      <div id="CPU" class="tabcontent">
-	<p>CPU Stuff</p>
-      </div>
+	<!-- Tab content -->
+	<div id="CPU" class="tabcontent" style="float:right;">
+	  <p>CPU Stuff</p>
+	</div>
+	
+	<div id="RAM" class="tabcontent" style="float:right;">
+	  <p>RAM Stuff</p>
+	</div>
 
-      <div id="RAM" class="tabcontent">
-	<p>RAM Stuff</p>
+	<div id="Logins" class="tabcontent" style="float:right;">
+	  <p>Login Stuff</p>
+	</div>
       </div>
-
-      <div id="Logins" class="tabcontent">
-	<p>Login Stuff</p>
-      </div>
-      
+	
     </div>
     <script>
       document.getElementById("defaultOpen").click();
-      document.getElementById("NumOfSystems").innerHTML = 5; //JSONIFY it!!
+      document.getElementById("NumOfSystems").innerHTML = 2; //JSONIFY it!!
       _FillSystemNamesContainer();
     </script>
   </body>

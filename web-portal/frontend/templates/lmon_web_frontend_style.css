@@ -63,6 +63,9 @@ body {
 .orange-text {
     color: #ff1e00;
     float: right;
+    font-family: serif;
+    position: relative;
+    bottom: 7px;
 }
 
 .NumOfSystems-div {
@@ -72,7 +75,6 @@ body {
     float: right;
     position: relative;
     right: 10%;
-    font-style: oblique;
 }
 
  .dot {
@@ -139,4 +141,37 @@ body {
   background-color: #ff1e00;
  }
 
+ .main-space-div {
+    background-color: hsla(210, 20%, 50%, 0.2);
+    position: relative;
+    top: 0%;
+    left: 1%;
+    height: 70%;
+    width:98%;
+    border-radius: 110px 10px 10px 10px;
+    vertical-align: middle;
+ }
+
+ .system-names-container-div {
+     background-color: hsla(210, 20%, 50%, 0.001);
+     float: left;
+     position: relative;
+     top: 20%;
+     left: 15%;
+     height: 70%;
+     width: 40%;
+     border-radius: 10px 10px 10px 10px;
+     vertical-align: middle;
+ }
+
+ .system-names-titles-div {
+     color: #064771;
+     font-family: Avantgarde, 'TeX Gyre Adventor', 'URW Gothic L', sans-serif;
+     font-size: 14px;
+     font-weight: 700;
+     font-variant: small-caps;
+     position: relative;
+     top: 15%;
+     left: 15%;
+ }
  
