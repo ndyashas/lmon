@@ -1,0 +1,142 @@
+
+body {
+    background-color: hsla(210, 20%, 50%, 0.3);
+}
+
+#NumOfSystems {
+    float:left;
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    padding: 7px;
+    border-radius: 25px;
+    vertical-align: super;
+    font-style: bold;
+}
+
+.main-div {
+    background-color: #FFFFFF;
+    border-radius: 25px;
+    height: 600px;
+    width: 1300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.sub-heading-div {
+    color: #064771;
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    position: relative;
+    top: 0%;
+    left: 3%;
+    float: left;
+    height: 5%;
+    width:36%;
+}
+
+.heading-div {
+    color: #064769;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    border-radius: 20%;
+    position: relative;
+    top: 0%;
+    left: 3%;
+    height: 10%;
+    width:45%;
+    text-align: center;
+    font-variant: small-caps;
+}
+
+.blue-back-div {
+    background-color: hsla(210, 20%, 50%, 0.3);
+    position: relative;
+    top: 0%;
+    left: 1%;
+    height: 15%;
+    width:98%;
+    border-radius: 10px 140px 10px 140px;
+}
+
+.orange-text {
+    color: #ff1e00;
+    float: right;
+}
+
+.NumOfSystems-div {
+    color: #064769;
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    float: right;
+    position: relative;
+    right: 10%;
+    font-style: oblique;
+}
+
+ .dot {
+  height: 8px;
+  width: 8px;
+  background-color: #ff1e00;
+  border-radius: 50%;
+  display: inline-block;
+ }
+
+ .dot-tab {
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 10px 0px 10px 0px;
+ }
+
+ .align-dot-bottom {
+     margin: 32px 0px 0px 0px;
+ }
+
+ .tab {
+     float: right;
+     position: absolute;
+     top: 0.2%;
+     right: 5%;
+     overflow: hidden;
+     background-color: #FFFFFF;
+ }
+
+ .tab button {
+     background-color: inherit;
+     border: none;
+     outline: none;
+     cursor: pointer;
+     padding: 11px 13px;
+     transition:0.3s;
+     color: #064771;
+     font-family: Avantgarde, 'TeX Gyre Adventor', 'URW Gothic L', sans-serif;
+     font-style: oblique;
+     font-size: 13px;
+     font-weight: 600;
+ }
+
+ .tab button:hover {
+     color: #ff1e00;
+     font-size: 15px;
+ }
+
+ .tab button:active {
+     color: #ff9e00;
+     font-size: 16px;
+ }
+
+ .tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+ }
+
+ .activate {
+  background-color: #ff1e00;
+ }
+
+ 
