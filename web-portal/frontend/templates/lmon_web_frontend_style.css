@@ -161,15 +161,16 @@ label {
 
  .system-names-container-div {
      display:block;
-     background-color: hsla(210, 20%, 50%, 0.001);
+     background-color: transparent;
      float: left;
      position: relative;
      top: 40%;
-     left: 10%;
-     height: 70%;
-     width: 40%;
+     left: 9%;
+     height: 47%;
+     width: 15%;
      border-radius: 10px 10px 10px 10px;
      vertical-align: middle;
+     overflow-y: auto;
  }
 
  .system-names-titles-div {
@@ -182,4 +183,5 @@ label {
      top: 40%;
      left: 10%;
  }
+ 
  

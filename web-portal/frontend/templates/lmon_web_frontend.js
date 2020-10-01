@@ -42,7 +42,7 @@ function openTab(evt, tabName) {
 function _FillSystemNamesContainer()
 {
     var i, NumOfSystems, Systems, checkbox, label, container, br;
-    Systems = {"rover":"10.10.3.158", "blossom":"10.10.3.157"}; //JSONIFY it
+    Systems = {"rover":"10.10.3.158", "blossom":"10.10.3.157", "A1":"10.10.3.158", "A2":"10.10.3.157", "A3":"10.10.3.158", "A4":"10.10.3.157", "B1":"10.10.3.158", "B2":"10.10.3.157", "B3":"10.10.3.158", "B4":"10.10.3.157", "C1":"10.10.3.158", "C2":"10.10.3.157"}; //JSONIFY it
     UniqueSystemNames = Object.keys(Systems);
     UniqueSystemNames.sort();
     NumOfSystems = Object.keys(Systems).length;
