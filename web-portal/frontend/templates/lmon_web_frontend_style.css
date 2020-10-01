@@ -3,6 +3,11 @@ body {
     background-color: hsla(210, 20%, 50%, 0.3);
 }
 
+label {
+    font-family: serif;
+    color: #064771;
+}
+
 #NumOfSystems {
     float:left;
     font-family: 'Playfair Display', serif;
@@ -132,8 +137,11 @@ body {
 
  .tabcontent {
      float: right;
-     width: 60%;
-     height: 45%;
+     width: 59%;
+     height: 23%;
+     position: relative;
+     right: 3%;
+     top: 0%;
  }
 
  .activate {
@@ -152,11 +160,12 @@ body {
  }
 
  .system-names-container-div {
+     display:block;
      background-color: hsla(210, 20%, 50%, 0.001);
      float: left;
      position: relative;
-     top: 20%;
-     left: 15%;
+     top: 40%;
+     left: 10%;
      height: 70%;
      width: 40%;
      border-radius: 10px 10px 10px 10px;
@@ -170,7 +179,7 @@ body {
      font-weight: 700;
      font-variant: small-caps;
      position: relative;
-     top: 15%;
-     left: 15%;
+     top: 40%;
+     left: 10%;
  }
  
