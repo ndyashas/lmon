@@ -89,17 +89,22 @@ function _FillCPUChart()
   data: {
     labels: x_data,
     datasets: my_dataset
-  },
+        },
   options: {
     title: {
       display: false,
       text: 'CPU Utilization'
-    }
-  },
-	scaleOverride: true,
-	scaleSteps: 10,
-	scaleStepWidth: 10,
-	scaleStartValue: 0
-});
+           },
+      scales: {
+	  yAxes: [ {
+	          ticks: {
+		     beginAtZero: true,
+		      min:0,
+		      max:100,
+		      stepsize:10
+		         }
+	           } ]
+              }
+  }});
 
 }
