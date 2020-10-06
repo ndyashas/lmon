@@ -1,9 +1,13 @@
 from flask import Flask
 import utils.utils as utils
+from flask_cors import CORS
 
 app = Flask(__name__)
 
 util_obj = utils.Util()
+
+CORS(app)
+
 
 @app.route("/api/v1/get-number-of-machines/<string:date>",
            methods=['GET'])

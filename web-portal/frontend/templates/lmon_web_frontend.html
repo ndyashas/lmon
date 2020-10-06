@@ -70,9 +70,23 @@
 	
     </div>
     <script>
-      document.getElementById("defaultOpen").click();
-      document.getElementById("NumOfSystems").innerHTML = 2; //JSONIFY it!!
-      _FillSystemNamesContainer();
+
+      function temp_func(event){
+	  if (this.readyState == 4 && this.status == 200){
+	      var res = this.responseText;
+	      var resJSON = JSON.parse(res);
+
+	      document.getElementById("defaultOpen").click();
+	      document.getElementById("NumOfSystems").innerHTML = resJSON['05-10-2020'];
+	      _FillSystemNamesContainer();
+	  }
+      }
+
+      xhr_object = new XMLHttpRequest();
+      xhr_object.onload = temp_func;
+      xhr_object.open('GET', 'http://127.0.0.1:8000/api/v1/get-number-of-machines/05-10-2020');
+      xhr_object.send();
+
     </script>
   </body>
 </html>
