@@ -192,3 +192,9 @@ function _FillRAMChart()
     });
 
 }
+
+function _SetDefaultDateToYesterday()
+{
+    var yesterday_date = new Date(new Date().setDate(new Date().getDate()-1));
+    document.querySelector("#date-input").value = yesterday_date.toISOString().substr(0, 10);
+}
