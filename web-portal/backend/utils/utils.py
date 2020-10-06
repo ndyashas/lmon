@@ -23,11 +23,15 @@ class Util:
         Return {} if no data was collected on the given day.
         """
         machines = dict()
-        machines_list =  [os.path.basename(i) for i in glob.glob(os.path.join(self._log_dir, date, "*"))]
-        for i in machines_list:
-            if i=="localhost":
-                system_name, ip = "localhost", "localhost"
-            else:
-                system_name, ip = i.split('@')
-            machines[system_name] = ip
+        machines_list =  glob.glob(os.path.join(self._log_dir, date, "*"))
+        for path in machines_list:
+            address = os.path.basename(path)
+            if '@' in os.path.basename(path):
+                address = os.path.basename(path).split('@')[-1]
+
+            hostname = "unnamed"
+            with open(os.path.join(path, "hostname.txt"), 'r') as f:
+                hostname = f.read().strip()
+
+            machines[address] = hostname
         return machines
