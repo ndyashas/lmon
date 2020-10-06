@@ -202,3 +202,21 @@ function _SetDefaultDateToYesterday()
     document.querySelector("#date-input").min = min_date.toISOString().substr(0, 10);
     document.querySelector("#date-input").max = max_date.toISOString().substr(0, 10);
 }
+
+function UpdateNumberOfSystems(event)
+{
+	  if (this.readyState == 4 && this.status == 200){
+	      var res = this.responseText;
+	      var resJSON = JSON.parse(res);
+	      document.getElementById("NumOfSystems").innerHTML = resJSON[document.querySelector("#date-input").value];
+	  }
+}
+
+function LogDateModified(event)
+{
+    console.log("LogDateModified Event");
+    xhr_object = new XMLHttpRequest();
+    xhr_object.onload = UpdateNumberOfSystems;
+    xhr_object.open('GET', 'http://127.0.0.1:8000/api/v1/get-number-of-machines/'+document.getElementById('date-input').value);
+    xhr_object.send();
+}

@@ -71,23 +71,18 @@
     </div>
     <script>
 
-      function temp_func(event){
-	  if (this.readyState == 4 && this.status == 200){
-	      var res = this.responseText;
-	      var resJSON = JSON.parse(res);
-
-	      document.getElementById("defaultOpen").click();
-	      document.getElementById("NumOfSystems").innerHTML = resJSON['05-10-2020'];
-	      _FillSystemNamesContainer();
-	      _SetDefaultDateToYesterday();
-	  }
-      }
-
+      _FillSystemNamesContainer();
+      _SetDefaultDateToYesterday();
+      document.getElementById("defaultOpen").click();
+      
       xhr_object = new XMLHttpRequest();
-      xhr_object.onload = temp_func;
-      xhr_object.open('GET', 'http://127.0.0.1:8000/api/v1/get-number-of-machines/05-10-2020');
+      xhr_object.onload = UpdateNumberOfSystems;
+      xhr_object.open('GET', 'http://127.0.0.1:8000/api/v1/get-number-of-machines/'+new Date(new Date().setDate(new Date().getDate()-1)).toISOString().substr(0, 10));
       xhr_object.send();
 
+      const date_input_element = document.getElementById('date-input');
+      date_input_element.addEventListener('input', LogDateModified);
+      console.log(document.getElementById('date-input'));
     </script>
   </body>
 </html>
