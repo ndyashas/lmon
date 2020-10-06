@@ -41,29 +41,41 @@ function openTab(evt, tabName) {
 
 function _FillSystemNamesContainer()
 {
-    var i, NumOfSystems, Systems, checkbox, label, container, br;
-    Systems = {"rover":"10.10.3.158", "blossom":"10.10.3.157", "A1":"10.10.3.158", "A2":"10.10.3.157", "A3":"10.10.3.158", "A4":"10.10.3.157", "B1":"10.10.3.158", "B2":"10.10.3.157", "B3":"10.10.3.158", "B4":"10.10.3.157", "C1":"10.10.3.158", "C2":"10.10.3.157"}; //JSONIFY it
-    UniqueSystemNames = Object.keys(Systems);
-    UniqueSystemNames.sort();
-    NumOfSystems = Object.keys(Systems).length;
-    container = document.getElementById('system-names-container');
-    for(i=0; i<NumOfSystems; i++)
+    if (this.readyState == 4 && this.status == 200)
     {
-	checkbox = document.createElement('input');
-	checkbox.type = 'checkbox';
-	checkbox.id = 'checkbox-'+UniqueSystemNames[i];
-	checkbox.name = 'checkbox-'+UniqueSystemNames[i];
-	checkbox.value = UniqueSystemNames[i]+'-'+Systems[UniqueSystemNames[i]];
-
-	label = document.createElement('label')
-	label.htmlFor = 'checkbox-'+UniqueSystemNames[i];
-	label.appendChild(document.createTextNode(UniqueSystemNames[i]+'-'+Systems[UniqueSystemNames[i]]));
-
-	br=document.createElement('br');
-
-	container.appendChild(checkbox);
-	container.appendChild(label);
-	container.appendChild(br);
+	var res = this.responseText;
+	var resJSON = JSON.parse(res);
+	var i, NumOfSystems, Systems, checkbox, label, container, br;
+	Systems = resJSON[document.querySelector("#date-input").value];
+	console.log(Systems);
+	//Systems = {"rover":"10.10.3.158", "blossom":"10.10.3.157", "A1":"10.10.3.158", "A2":"10.10.3.157", "A3":"10.10.3.158", "A4":"10.10.3.157", "B1":"10.10.3.158", "B2":"10.10.3.157", "B3":"10.10.3.158", "B4":"10.10.3.157", "C1":"10.10.3.158", "C2":"10.10.3.157"}; //JSONIFY it
+	UniqueSystemNames = Object.keys(Systems);
+	UniqueSystemNames.sort();
+	NumOfSystems = Object.keys(Systems).length;
+	container = document.getElementById('system-names-container');
+	//clearing it initially
+	while (container.firstChild) {
+	    container.firstChild.remove()
+	}
+	//Adding new elements
+	for(i=0; i<NumOfSystems; i++)
+	{
+	    checkbox = document.createElement('input');
+	    checkbox.type = 'checkbox';
+	    checkbox.id = 'checkbox-'+UniqueSystemNames[i];
+	    checkbox.name = 'checkbox-'+UniqueSystemNames[i];
+	    checkbox.value = UniqueSystemNames[i]+'-'+Systems[UniqueSystemNames[i]];
+	    
+	    label = document.createElement('label')
+	    label.htmlFor = 'checkbox-'+UniqueSystemNames[i];
+	    label.appendChild(document.createTextNode(UniqueSystemNames[i]+'-'+Systems[UniqueSystemNames[i]]));
+	    
+	    br=document.createElement('br');
+	    
+	    container.appendChild(checkbox);
+	    container.appendChild(label);
+	    container.appendChild(br);
+	}
     }
 }
 
@@ -203,7 +215,7 @@ function _SetDefaultDateToYesterday()
     document.querySelector("#date-input").max = max_date.toISOString().substr(0, 10);
 }
 
-function UpdateNumberOfSystems(event)
+function UpdateNumberOfSystems()
 {
 	  if (this.readyState == 4 && this.status == 200){
 	      var res = this.responseText;
@@ -215,8 +227,14 @@ function UpdateNumberOfSystems(event)
 function LogDateModified(event)
 {
     console.log("LogDateModified Event");
+    //Update the number of systems
     xhr_object = new XMLHttpRequest();
     xhr_object.onload = UpdateNumberOfSystems;
     xhr_object.open('GET', 'http://127.0.0.1:8000/api/v1/get-number-of-machines/'+document.getElementById('date-input').value);
     xhr_object.send();
+    //Update the System Names and IPs checkbox container
+    xhr_object_01 = new XMLHttpRequest();
+    xhr_object_01.onload = _FillSystemNamesContainer;
+    xhr_object_01.open('GET', 'http://127.0.0.1:8000/api/v1/get-machines/'+document.getElementById('date-input').value);
+    xhr_object_01.send();
 }

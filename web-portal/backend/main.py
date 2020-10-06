@@ -14,3 +14,10 @@ CORS(app)
 def get_num_of_machines(date):
     num_machines = util_obj.get_num_of_machines(date)
     return {date:num_machines}
+
+@app.route("/api/v1/get-machines/<string:date>",
+           methods=['GET'])
+def get_machines(date):
+    machines = util_obj.get_machines(date)
+    return {date:machines}
+
