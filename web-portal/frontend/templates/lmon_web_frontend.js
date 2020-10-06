@@ -196,5 +196,9 @@ function _FillRAMChart()
 function _SetDefaultDateToYesterday()
 {
     var yesterday_date = new Date(new Date().setDate(new Date().getDate()-1));
+    var min_date = new Date(new Date().setDate(new Date().getDate()-30));
+    var max_date = yesterday_date;
     document.querySelector("#date-input").value = yesterday_date.toISOString().substr(0, 10);
+    document.querySelector("#date-input").min = min_date.toISOString().substr(0, 10);
+    document.querySelector("#date-input").max = max_date.toISOString().substr(0, 10);
 }
