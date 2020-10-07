@@ -99,8 +99,25 @@ function CheckboxClicked()
 function _FillCPUChart()
 {
     var i, d;
-
+    var checkbks_all = document.querySelectorAll("#system-names-container input[type='checkbox']");
+    for(i=0; i<checkbks_all.length; i++)
+	{
+	    checkbks_all[i].disabled=false;
+	} 
+    
     var checkbks = document.querySelectorAll("#system-names-container input[type='checkbox']:checked");
+    console.log(checkbks.length);
+    if(checkbks.length>=5)
+    {
+	//console.log(">=5!!!!!");
+	var checkbks_to_disable = document.querySelectorAll("#system-names-container input[type='checkbox']:not(:checked)");
+	for(i=0; i<checkbks_to_disable.length; i++)
+	{
+	    console.log(checkbks_to_disable[i]);
+	    checkbks_to_disable[i].disabled=true;
+	}
+	
+    }
     var machines_selected = [];
     for(i=0; i<checkbks.length; i++)
     {
