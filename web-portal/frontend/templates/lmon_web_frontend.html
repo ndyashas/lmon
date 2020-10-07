@@ -77,7 +77,7 @@
       
       xhr_object = new XMLHttpRequest();
       xhr_object.onload = UpdateNumberOfSystems;
-      xhr_object.open('GET', 'http://127.0.0.1:8000/api/v1/get-number-of-machines/'+new Date(new Date().setDate(new Date().getDate()-1)).toISOString().substr(0, 10));
+      xhr_object.open('GET', 'http://127.0.0.1:8000/api/v1/get-machines/'+new Date(new Date().setDate(new Date().getDate()-1)).toISOString().substr(0, 10));
       xhr_object.send();
 
       xhr_object_01 = new XMLHttpRequest();

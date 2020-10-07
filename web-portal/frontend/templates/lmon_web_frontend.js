@@ -246,7 +246,7 @@ function UpdateNumberOfSystems()
 	  if (this.readyState == 4 && this.status == 200){
 	      var res = this.responseText;
 	      var resJSON = JSON.parse(res);
-	      document.getElementById("NumOfSystems").innerHTML = resJSON[document.querySelector("#date-input").value];
+	      document.getElementById("NumOfSystems").innerHTML = Object.keys(resJSON[document.querySelector("#date-input").value]).length;
 	  }
 }
 
@@ -256,7 +256,7 @@ function LogDateModified(event)
     //Update the number of systems
     xhr_object = new XMLHttpRequest();
     xhr_object.onload = UpdateNumberOfSystems;
-    xhr_object.open('GET', 'http://127.0.0.1:8000/api/v1/get-number-of-machines/'+document.getElementById('date-input').value);
+    xhr_object.open('GET', 'http://127.0.0.1:8000/api/v1/get-machines/'+document.getElementById('date-input').value);
     xhr_object.send();
     //Update the System Names and IPs checkbox container
     xhr_object_01 = new XMLHttpRequest();
