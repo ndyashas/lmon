@@ -86,25 +86,11 @@ function _FillSystemNamesContainer()
 
 function CheckboxClicked()
 {
-    if(CurrentTab == "CPU")
-    {
-	_FillCPUChart();
-    }
-    else if(CurrentTab == "RAM")
-    {
-	_FillRAMChart();
-    }
-}
-
-function _FillCPUChart()
-{
-    var i, d;
     var checkbks_all = document.querySelectorAll("#system-names-container input[type='checkbox']");
     for(i=0; i<checkbks_all.length; i++)
 	{
 	    checkbks_all[i].disabled=false;
 	} 
-    
     var checkbks = document.querySelectorAll("#system-names-container input[type='checkbox']:checked");
     console.log(checkbks.length);
     if(checkbks.length>=5)
@@ -118,6 +104,24 @@ function _FillCPUChart()
 	}
 	
     }
+    
+    if(CurrentTab == "CPU")
+    {
+	_FillCPUChart();
+    }
+    else if(CurrentTab == "RAM")
+    {
+	_FillRAMChart();
+    }
+}
+
+function _FillCPUChart()
+{
+    var i, d;
+    
+    var checkbks = document.querySelectorAll("#system-names-container input[type='checkbox']:checked");
+    console.log(checkbks.length);
+
     var machines_selected = [];
     for(i=0; i<checkbks.length; i++)
     {
