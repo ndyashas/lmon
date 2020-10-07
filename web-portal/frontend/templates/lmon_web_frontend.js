@@ -68,12 +68,12 @@ function _FillSystemNamesContainer()
 	    checkbox.type = 'checkbox';
 	    checkbox.id = 'checkbox-'+UniqueSystemNames[i];
 	    checkbox.name = 'checkbox-'+UniqueSystemNames[i];
-	    checkbox.value = UniqueSystemNames[i]+'-'+Systems[UniqueSystemNames[i]];
+	    checkbox.value = Systems[UniqueSystemNames[i]]['address']+'-'+Systems[UniqueSystemNames[i]]['hostname'];
 	    checkbox.onclick = CheckboxClicked;
 	    
 	    label = document.createElement('label')
 	    label.htmlFor = 'checkbox-'+UniqueSystemNames[i];
-	    label.appendChild(document.createTextNode(UniqueSystemNames[i]+'-'+Systems[UniqueSystemNames[i]]));
+	    label.appendChild(document.createTextNode(Systems[UniqueSystemNames[i]]['address']+'-'+Systems[UniqueSystemNames[i]]['hostname']));
 	    
 	    br=document.createElement('br');
 	    
