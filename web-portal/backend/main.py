@@ -27,3 +27,10 @@ def get_cpu_usage(date, machine_id):
 def get_mem_usage(date, machine_id):
     mem_usage_dict = util_obj.get_machine_data(date, machine_id, 'mem')
     return {date:mem_usage_dict}
+
+
+@app.route("/api/v1/get-login-details/<string:date>/<string:machine_id>",
+           methods=['GET'])
+def get_login_details(date, machine_id):
+    login_details_dict = util_obj.get_login_details(date, machine_id)
+    return {date:login_details_dict}
