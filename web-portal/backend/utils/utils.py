@@ -9,14 +9,16 @@ class Util:
 
     def get_machines(self, date):
         """Return a dictionary of machines from which data was 
-        collected on the input date where key is the machine name and it's value is the IP.
+        collected on the input date where key is the machine id and it's value
+        is a dictionary of the form {'hostname':hostname, 'address':address}.
         
         Return {} if no data was collected on the given day.
         """
         machines = dict()
         machines_list =  glob.glob(os.path.join(self._log_dir, date, "*"))
         for path in machines_list:
-            address = os.path.basename(path)
+            machine_id = os.path.basename(path)
+            address = machine_id
             if '@' in os.path.basename(path):
                 address = os.path.basename(path).split('@')[-1]
 
@@ -24,5 +26,5 @@ class Util:
             with open(os.path.join(path, "hostname.txt"), 'r') as f:
                 hostname = f.read().strip()
 
-            machines[address] = hostname
+            machines[machine_id] = {'hostname':hostname, 'address':address}
         return machines
