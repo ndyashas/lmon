@@ -7,3 +7,4 @@ __pycache__/
 
 # Ignore the machine file
 config/machinefile
+config/backend_server_url
