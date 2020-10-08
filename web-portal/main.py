@@ -1,6 +1,6 @@
+import os
 from flask import Flask
 from flask import render_template
-from flask import send_from_directory
 import utils.utils as utils
 
 app = Flask(__name__,
@@ -8,6 +8,8 @@ app = Flask(__name__,
             static_folder='static')
 
 util_obj = utils.Util()
+with open(os.path.join(util_obj.lmon_path, "config", "backend_server_url"), "r") as f:
+    backend_url=f.read().strip()
 
 
 @app.route("/api/v1/get-machines/<string:date>",
@@ -39,4 +41,4 @@ def get_login_details(date, machine_id):
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", backend_url=backend_url)
