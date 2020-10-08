@@ -66,11 +66,8 @@ class Util:
         """Get login data that is updated till a given date for a machine
         """
         machine_dir = os.path.join(self._log_dir, date, machine_id)
-
+        toret = "No login information has been recorded"
         if (os.path.isdir(machine_dir)):
-            toret = ""
             with open(os.path.join(machine_dir, "last_login_info.txt"), 'r') as data_f:
                 toret = data_f.read().rstrip()
-            return toret
-        else:
-            return ""
+        return {machine_id:toret}
