@@ -1,8 +1,12 @@
 from flask import Flask
+from flask import render_template
+from flask import send_from_directory
 import utils.utils as utils
 from flask_cors import CORS
 
-app = Flask(__name__)
+app = Flask(__name__,
+            static_url_path='',
+            static_folder='static')
 
 util_obj = utils.Util()
 
@@ -34,3 +38,7 @@ def get_mem_usage(date, machine_id):
 def get_login_details(date, machine_id):
     login_details_dict = util_obj.get_login_details(date, machine_id)
     return {date:login_details_dict}
+
+@app.route("/")
+def index():
+    return render_template("index.html")
