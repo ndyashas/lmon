@@ -122,17 +122,17 @@ function CheckboxClicked(event)
     
     xhr_object_01 = new XMLHttpRequest();
     xhr_object_01.onload = Update_CPU_ydata;
-    xhr_object_01.open('GET', 'http://127.0.0.1:8000/api/v1/get-cpu-usage/'+document.getElementById('date-input').value+'/'+event.target.machine_id);
+    xhr_object_01.open('GET', 'http://'+document.BACKEND_URL+'/api/v1/get-cpu-usage/'+document.getElementById('date-input').value+'/'+event.target.machine_id);
     xhr_object_01.send();
 
     xhr_object_02 = new XMLHttpRequest();
     xhr_object_02.onload = Update_RAM_ydata;
-    xhr_object_02.open('GET', 'http://127.0.0.1:8000/api/v1/get-mem-usage/'+document.getElementById('date-input').value+'/'+event.target.machine_id);
+    xhr_object_02.open('GET', 'http://'+document.BACKEND_URL+'/api/v1/get-mem-usage/'+document.getElementById('date-input').value+'/'+event.target.machine_id);
     xhr_object_02.send();
 
     xhr_object_03 = new XMLHttpRequest();
     xhr_object_03.onload = Update_Logins_data;
-    xhr_object_03.open('GET', 'http://127.0.0.1:8000/api/v1/get-login-details/'+document.getElementById('date-input').value+'/'+event.target.machine_id);
+    xhr_object_03.open('GET', 'http://'+document.BACKEND_URL+'/api/v1/get-login-details/'+document.getElementById('date-input').value+'/'+event.target.machine_id);
     xhr_object_03.send();    
 
 
@@ -411,14 +411,15 @@ function LogDateModified(event)
 {
     //console.log("LogDateModified Event");
     //Update the number of systems
+    console.log(document.BACKEND_URL);
     xhr_object = new XMLHttpRequest();
     xhr_object.onload = UpdateNumberOfSystems;
-    xhr_object.open('GET', 'http://127.0.0.1:8000/api/v1/get-machines/'+document.getElementById('date-input').value);
+    xhr_object.open('GET', 'http://'+document.BACKEND_URL+'/api/v1/get-machines/'+document.getElementById('date-input').value);
     xhr_object.send();
     //Update the System Names and IPs checkbox container
     xhr_object_01 = new XMLHttpRequest();
     xhr_object_01.onload = _FillSystemNamesContainer;
-    xhr_object_01.open('GET', 'http://127.0.0.1:8000/api/v1/get-machines/'+document.getElementById('date-input').value);
+    xhr_object_01.open('GET', 'http://'+document.BACKEND_URL+'/api/v1/get-machines/'+document.getElementById('date-input').value);
     xhr_object_01.send();
     //Update the CPU_ydata and RAM_ydata to {} and clear the logins information displayed.
     CPU_ydata = {};

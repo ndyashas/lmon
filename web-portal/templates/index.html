@@ -80,12 +80,12 @@
       
       xhr_object = new XMLHttpRequest();
       xhr_object.onload = UpdateNumberOfSystems;
-      xhr_object.open('GET', 'http://127.0.0.1:8000/api/v1/get-machines/'+new Date(new Date().setDate(new Date().getDate()-1)).toISOString().substr(0, 10));
+      xhr_object.open('GET', 'http://'+document.BACKEND_URL+'/api/v1/get-machines/'+new Date(new Date().setDate(new Date().getDate()-1)).toISOString().substr(0, 10));
       xhr_object.send();
 
       xhr_object_01 = new XMLHttpRequest();
       xhr_object_01.onload = _FillSystemNamesContainer;
-      xhr_object_01.open('GET', 'http://127.0.0.1:8000/api/v1/get-machines/'+new Date(new Date().setDate(new Date().getDate()-1)).toISOString().substr(0, 10));
+      xhr_object_01.open('GET', 'http://'+document.BACKEND_URL+'/api/v1/get-machines/'+new Date(new Date().setDate(new Date().getDate()-1)).toISOString().substr(0, 10));
       xhr_object_01.send();
 
       const date_input_element = document.getElementById('date-input');
