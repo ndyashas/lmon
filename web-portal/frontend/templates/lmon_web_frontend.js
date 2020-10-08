@@ -2,6 +2,7 @@ var CurrentTab = "";
 var CPU_ydata = {};
 var RAM_ydata = {};
 var Logins_data = {};
+var MachineId_IpHostname = {};
 
 function openTab(evt, tabName) {
     var i, tabcontent, tablinks, tabdots;
@@ -59,6 +60,7 @@ function _FillSystemNamesContainer()
 	var resJSON = JSON.parse(res);
 	var i, NumOfSystems, Systems, checkbox, label, container, br;
 	Systems = resJSON[document.querySelector("#date-input").value];
+	MachineId_IpHostname = {};
 	//console.log(Systems);
 	//Systems = {"rover":"10.10.3.158", "blossom":"10.10.3.157", "A1":"10.10.3.158", "A2":"10.10.3.157", "A3":"10.10.3.158", "A4":"10.10.3.157", "B1":"10.10.3.158", "B2":"10.10.3.157", "B3":"10.10.3.158", "B4":"10.10.3.157", "C1":"10.10.3.158", "C2":"10.10.3.157"}; //JSONIFY it
 	UniqueSystemNames = Object.keys(Systems);
@@ -72,6 +74,8 @@ function _FillSystemNamesContainer()
 	//Adding new elements
 	for(i=0; i<NumOfSystems; i++)
 	{
+	    MachineId_IpHostname[UniqueSystemNames[i]] = Systems[UniqueSystemNames[i]]['address']+'-'+Systems[UniqueSystemNames[i]]['hostname'];
+	    
 	    checkbox = document.createElement('input');
 	    checkbox.type = 'checkbox';
 	    checkbox.id = 'checkbox-'+UniqueSystemNames[i];
@@ -210,7 +214,8 @@ function _FillLoginsChart()
     {
 	if(machines_selected[i] in Logins_data)
 	{
-	    document.getElementById("Logins").innerHTML += machines_selected[i] + ": <br>";
+	    document.getElementById("Logins").innerHTML += "<span style='font-size: 20px; color: #ff1e00;'>" + MachineId_IpHostname[machines_selected[i]] + ": </span> <br>";
+	    document.getElementById("Logins").innerHTML += "<pre>" + Logins_data[machines_selected[i]].replaceAll("\n", "<br>") + "</pre> <br>";
 	    console.log(machines_selected[i]);
 	}
     }
