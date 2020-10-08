@@ -61,8 +61,6 @@ function _FillSystemNamesContainer()
 	var i, NumOfSystems, Systems, checkbox, label, container, br;
 	Systems = resJSON[document.querySelector("#date-input").value];
 	MachineId_IpHostname = {};
-	//console.log(Systems);
-	//Systems = {"rover":"10.10.3.158", "blossom":"10.10.3.157", "A1":"10.10.3.158", "A2":"10.10.3.157", "A3":"10.10.3.158", "A4":"10.10.3.157", "B1":"10.10.3.158", "B2":"10.10.3.157", "B3":"10.10.3.158", "B4":"10.10.3.157", "C1":"10.10.3.158", "C2":"10.10.3.157"}; //JSONIFY it
 	UniqueSystemNames = Object.keys(Systems);
 	UniqueSystemNames.sort();
 	NumOfSystems = Object.keys(Systems).length;
@@ -98,23 +96,18 @@ function _FillSystemNamesContainer()
 }
 
 function CheckboxClicked(event)
-{
-    //console.log("The Event is");
-    //console.log(event.target.machine_id);
-    
+{    
     var checkbks_all = document.querySelectorAll("#system-names-container input[type='checkbox']");
     for(i=0; i<checkbks_all.length; i++)
 	{
 	    checkbks_all[i].disabled=false;
 	} 
     var checkbks = document.querySelectorAll("#system-names-container input[type='checkbox']:checked");
-    //console.log(checkbks.length);
     if(checkbks.length>=5)
     {
 	var checkbks_to_disable = document.querySelectorAll("#system-names-container input[type='checkbox']:not(:checked)");
 	for(i=0; i<checkbks_to_disable.length; i++)
 	{
-	    //console.log(checkbks_to_disable[i]);
 	    checkbks_to_disable[i].disabled=true;
 	}
 	
@@ -157,7 +150,6 @@ function Update_CPU_ydata()
 	var res = this.responseText;
 	var resJSON = JSON.parse(res);
 	CPU_ydata = {...CPU_ydata, ...resJSON[document.getElementById('date-input').value]};
-	console.log(CPU_ydata);
     
 	if(CurrentTab == "CPU")
 	{
@@ -173,7 +165,6 @@ function Update_RAM_ydata()
 	var res = this.responseText;
 	var resJSON = JSON.parse(res);
 	RAM_ydata = {...RAM_ydata, ...resJSON[document.getElementById('date-input').value]};
-	console.log(RAM_ydata);
 	if(CurrentTab == "RAM")
 	{
 	    _FillRAMChart();
@@ -207,16 +198,12 @@ function _FillLoginsChart()
     {
 	machines_selected.push(checkbks[i].id.split("-")[1]);
     }
-    console.log("LOginssssssss");
-    console.log(machines_selected);
-    console.log(Logins_data);
     for(i=0; i<machines_selected.length; i++)
     {
 	if(machines_selected[i] in Logins_data)
 	{
 	    document.getElementById("Logins").innerHTML += "<span style='font-size: 18px; color: #ff1e00; font-family: Monospace;'>" + MachineId_IpHostname[machines_selected[i]] + ": </span> <br>";
 	    document.getElementById("Logins").innerHTML += "<pre>" + Logins_data[machines_selected[i]].replaceAll("\n", "<br>") + "</pre> <br>";
-	    console.log(machines_selected[i]);
 	}
     }
 }
@@ -227,7 +214,6 @@ function _FillCPUChart()
     var i, d;
     
     var checkbks = document.querySelectorAll("#system-names-container input[type='checkbox']:checked");
-    //console.log(checkbks.length);
 
     var machines_selected = [];
     for(i=0; i<checkbks.length; i++)
@@ -235,12 +221,8 @@ function _FillCPUChart()
 	machines_selected.push(checkbks[i].id.split("-")[1]);
     }
 
-    //console.log(machines_selected);
-    
     var x_data = [...Array(24).keys()];
     var y_data = {};
-    //{"blossom@10.10.3.157":[9.81, 4.84, 1.92, 1.76, 5.61, 10.73, 18.78, 29.21, 80.61, 24.98, 25.83, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3.24, 1.58, 8.17, 5.42, 3.73, 2.05, 2.74, 3.55, 3.29, 2.04, 1.56, 1.45, 0.55, 1.41, 1.68, 1.6, 3.97, 2.08, 1.97, 14.37, 4.84, 3.09, 5.37, 1.85, 1.75, 1.95, 1.97, 12.34, 11.77, 6.1, 2.79, 7.12, 3.79, 3.9, 5.52, 2.63, 7.71, 13.81, 14.33, 13.64, 10.59, 6.9, 0.63, 2.16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14.4, 7.83, 7.35, 3.63, 22.21, 23.37, 21.66, 10.69, 3.44, 3.18, 3.28, 3.55, 3.51, 3.53, 3.62, 3.39, 3.42, 3.44, 3.29, 6.28, 9.81, 10.21, 8.57, 2.07, 1.17, 0.9, 3.52, 0, 0, 0, 0], "rover@10.10.3.158":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17.86, 16.19, 15.1, 15.89, 21.09, 20.71, 24.15, 24.34, 14.8, 14.15, 15.27, 14.24, 15.08, 17.65, 16.93, 12.44, 14.87, 12.42, 12.19, 0, 0, 0, 0, 0, 0, 29.62, 7.86, 1.92, 0, 0, 0, 19.18, 19.61, 14.82, 13.89, 13.91, 14.03, 14.39, 14.07, 17.37, 16.15, 16.22, 15.18, 18.74, 20.01, 14.5, 13.21, 16.28, 19.27, 0, 0, 0, 0, 0, 0, 0, 33.72, 14.49, 11.52, 10.85, 1.77, 10.36, 22.39, 17.92, 12.89, 12.73, 12.0, 15.02, 16.21, 12.38, 0, 0, 0, 0, 0, 17.49, 17.64, 11.51, 10.92, 11.42, 11.64, 10.57, 11.1, 29.96, 30.51, 0, 0, 0]}; //JSONify it
-
     for(i=0; i<machines_selected.length; i++)
     {
 	if(machines_selected[i] in CPU_ydata)
@@ -310,15 +292,12 @@ function _FillRAMChart()
 {
     var i, d;
     var checkbks = document.querySelectorAll("#system-names-container input[type='checkbox']:checked");
-    //console.log(checkbks.length);
 
     var machines_selected = [];
     for(i=0; i<checkbks.length; i++)
     {
 	machines_selected.push(checkbks[i].id.split("-")[1]);
     }
-
-    //console.log(machines_selected);
     
     var x_data = [...Array(24).keys()];
     var y_data = {};
@@ -409,9 +388,7 @@ function UpdateNumberOfSystems()
 
 function LogDateModified(event)
 {
-    //console.log("LogDateModified Event");
     //Update the number of systems
-    console.log(document.BACKEND_URL);
     xhr_object = new XMLHttpRequest();
     xhr_object.onload = UpdateNumberOfSystems;
     xhr_object.open('GET', 'http://'+document.BACKEND_URL+'/api/v1/get-machines/'+document.getElementById('date-input').value);
