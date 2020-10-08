@@ -2,7 +2,6 @@ from flask import Flask
 from flask import render_template
 from flask import send_from_directory
 import utils.utils as utils
-from flask_cors import CORS
 
 app = Flask(__name__,
             static_url_path='',
@@ -10,7 +9,6 @@ app = Flask(__name__,
 
 util_obj = utils.Util()
 
-CORS(app)
 
 @app.route("/api/v1/get-machines/<string:date>",
            methods=['GET'])
