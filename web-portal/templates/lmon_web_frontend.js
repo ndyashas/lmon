@@ -214,7 +214,7 @@ function _FillLoginsChart()
     {
 	if(machines_selected[i] in Logins_data)
 	{
-	    document.getElementById("Logins").innerHTML += "<span style='font-size: 20px; color: #ff1e00;'>" + MachineId_IpHostname[machines_selected[i]] + ": </span> <br>";
+	    document.getElementById("Logins").innerHTML += "<span style='font-size: 18px; color: #ff1e00; font-family: Monospace;'>" + MachineId_IpHostname[machines_selected[i]] + ": </span> <br>";
 	    document.getElementById("Logins").innerHTML += "<pre>" + Logins_data[machines_selected[i]].replaceAll("\n", "<br>") + "</pre> <br>";
 	    console.log(machines_selected[i]);
 	}
