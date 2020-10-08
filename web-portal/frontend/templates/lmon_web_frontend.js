@@ -1,6 +1,7 @@
 var CurrentTab = "";
 var CPU_ydata = {};
 var RAM_ydata = {};
+var Logins_data = {};
 
 function openTab(evt, tabName) {
     var i, tabcontent, tablinks, tabdots;
@@ -42,6 +43,11 @@ function openTab(evt, tabName) {
     {
 	_FillRAMChart();
 	CurrentTab = "RAM";
+    }
+    else if(tabName == "Logins")
+    {
+	_FillLoginsChart();
+	CurrentTab = "Logins"
     }
 }
 
@@ -115,10 +121,15 @@ function CheckboxClicked(event)
     xhr_object_01.open('GET', 'http://127.0.0.1:8000/api/v1/get-cpu-usage/'+document.getElementById('date-input').value+'/'+event.target.machine_id);
     xhr_object_01.send();
 
-    xhr_object_01 = new XMLHttpRequest();
-    xhr_object_01.onload = Update_RAM_ydata;
-    xhr_object_01.open('GET', 'http://127.0.0.1:8000/api/v1/get-mem-usage/'+document.getElementById('date-input').value+'/'+event.target.machine_id);
-    xhr_object_01.send();
+    xhr_object_02 = new XMLHttpRequest();
+    xhr_object_02.onload = Update_RAM_ydata;
+    xhr_object_02.open('GET', 'http://127.0.0.1:8000/api/v1/get-mem-usage/'+document.getElementById('date-input').value+'/'+event.target.machine_id);
+    xhr_object_02.send();
+
+    xhr_object_03 = new XMLHttpRequest();
+    xhr_object_03.onload = Update_Logins_data;
+    xhr_object_03.open('GET', 'http://127.0.0.1:8000/api/v1/get-login-details/'+document.getElementById('date-input').value+'/'+event.target.machine_id);
+    xhr_object_03.send();    
 
 
     if(CurrentTab == "CPU")
@@ -128,6 +139,10 @@ function CheckboxClicked(event)
     else if(CurrentTab == "RAM")
     {
 	_FillRAMChart();
+    }
+    else if(CurrentTab == "Logins")
+    {
+	_FillLoginsChart();
     }
 }
 
@@ -158,6 +173,45 @@ function Update_RAM_ydata()
 	if(CurrentTab == "RAM")
 	{
 	    _FillRAMChart();
+	}
+    }
+}
+
+function Update_Logins_data()
+{
+    if(this.readyState == 4 && this.status == 200)
+    {
+	var res = this.responseText;
+	var resJSON = JSON.parse(res);
+	Logins_data = {...Logins_data, ...resJSON[document.getElementById('date-input').value]};
+	if(CurrentTab == "Logins")
+	{
+	    _FillLoginsChart();
+	}
+    }
+}
+
+function _FillLoginsChart()
+{
+    document.getElementById("Logins").innerHTML = "";
+
+    var i, d;    
+    var checkbks = document.querySelectorAll("#system-names-container input[type='checkbox']:checked");
+
+    var machines_selected = [];
+    for(i=0; i<checkbks.length; i++)
+    {
+	machines_selected.push(checkbks[i].id.split("-")[1]);
+    }
+    console.log("LOginssssssss");
+    console.log(machines_selected);
+    console.log(Logins_data);
+    for(i=0; i<machines_selected.length; i++)
+    {
+	if(machines_selected[i] in Logins_data)
+	{
+	    document.getElementById("Logins").innerHTML += machines_selected[i] + ": <br>";
+	    console.log(machines_selected[i]);
 	}
     }
 }
@@ -361,7 +415,8 @@ function LogDateModified(event)
     xhr_object_01.onload = _FillSystemNamesContainer;
     xhr_object_01.open('GET', 'http://127.0.0.1:8000/api/v1/get-machines/'+document.getElementById('date-input').value);
     xhr_object_01.send();
-    //Update the CPU_ydata and RAM_ydata to {}
+    //Update the CPU_ydata and RAM_ydata to {} and clear the logins information displayed.
     CPU_ydata = {};
     RAM_ydata = {};
+    document.getElementById("Logins").innerHTML = "";
 }
