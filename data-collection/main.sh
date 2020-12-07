@@ -14,8 +14,14 @@ do
     ping_test "${HOST}"
 
     if [ $? -eq 0 ]; then
+	if [ -f "${HOSTPATH}"/ping-down ]; then
+	    rm "${HOSTPATH}"/ping-down
+	fi
 	check_ssh "${HOST}"
 	if [ $? -eq 0 ]; then
+	    if [ -f "${HOSTPATH}"/ssh-down ]; then
+		rm "${HOSTPATH}"/ssh-down
+	    fi
 	    bash "${LMON_HOME}"/data-collection/utils/cpu-usage.sh "${HOST}" > "${HOSTPATH}"/cpu-usage.csv < /dev/null;
 	    if [ $? -ne 0 ]; then rm -f "${HOSTPATH}"/cpu-usage.csv; touch "${HOSTPATH}"/cpu-test-down; fi
 	    bash "${LMON_HOME}"/data-collection/utils/mem-usage.sh "${HOST}" > "${HOSTPATH}"/mem-usage.csv < /dev/null;
