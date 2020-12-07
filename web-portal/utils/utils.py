@@ -8,8 +8,7 @@ class Util:
         self._lmon_path = os.path.join(os.environ.get('HOME'), ".lmon")
         self._log_dir = os.path.join(self._lmon_path, "log")
 
-        self._hours_list = [ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11,
-                            12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+        self._hours_list = list(range(24))
 
     @property
     def lmon_path(self):
