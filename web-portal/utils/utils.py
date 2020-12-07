@@ -1,6 +1,7 @@
 import os
 import csv
 import glob
+import datetime
 
 class Util:
 
@@ -74,3 +75,34 @@ class Util:
             with open(os.path.join(machine_dir, "last_login_info.txt"), 'r') as data_f:
                 toret = data_f.read().rstrip()
         return {machine_id:toret}
+
+    def ping_test(self, machine_id):
+        response = os.system("ping -c 4 "+ machine_id)
+        date = datetime.datetime.today().strftime("%Y-%m-%d")
+        machine_dir = os.path.join(self._log_dir, date, machine_id)
+        if response == 0:
+            if os.path.isfile(os.path.join(machine_dir, "ping-down")):
+                os.remove(os.path.join(machine_dir, "ping-down"))
+            return True
+        else:
+            try:
+                open(os.path.join(machine_dir, "ping-down"), 'w')
+            except Exception as e:
+                pass
+            return False
+
+    def ssh_test(self, machine_id):
+        # response = os.system("nc -4 -d -z -w 15 "+ machine_id +" 22")
+        response = os.system("ssh "+ machine_id +" 'hostname'")
+        date = datetime.datetime.today().strftime("%Y-%m-%d")
+        machine_dir = os.path.join(self._log_dir, date, machine_id)
+        if response == 0:
+            if os.path.isfile(os.path.join(machine_dir, "ssh-down")):
+                os.remove(os.path.join(machine_dir, "ssh-down"))
+            return True
+        else:
+            try:
+                open(os.path.join(machine_dir, "ssh-down"), 'w')
+            except Exception as e:
+                pass
+            return False

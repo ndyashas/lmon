@@ -39,6 +39,21 @@ def get_login_details(date, machine_id):
     login_details_dict = util_obj.get_login_details(date, machine_id)
     return {date:login_details_dict}
 
+
+@app.route("/api/v1/ping-test/<string:machine_id>",
+           methods=['GET'])
+def ping_test(machine_id):
+    ping_successful = util_obj.ping_test(machine_id)
+    return {machine_id:ping_successful}
+
+
+@app.route("/api/v1/ssh-test/<string:machine_id>",
+           methods=['GET'])
+def ssh_test(machine_id):
+    ssh_successful = util_obj.ssh_test(machine_id)
+    return {machine_id:ssh_successful}
+
+
 @app.route("/")
 def index():
     return render_template("index.html", backend_url=backend_url)
