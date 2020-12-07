@@ -121,7 +121,30 @@ label {
      background-color: #FFFFFF;
  }
 
+ .aggregate-sub-tab {
+     float: left;
+     position: absolute;
+     top: 5%;
+     right: 10%;
+     overflow: hidden;
+     background-color: #FFFFFF;
+ }
+
  .tab button {
+     background-color: inherit;
+     border: none;
+     outline: none;
+     cursor: pointer;
+     padding: 11px 13px;
+     transition:0.3s;
+     color: #064771;
+     font-family: Avantgarde, 'TeX Gyre Adventor', 'URW Gothic L', sans-serif;
+     font-style: oblique;
+     font-size: 13px;
+     font-weight: 600;
+ }
+
+ .aggregate-sub-tab button {
      background-color: inherit;
      border: none;
      outline: none;
@@ -140,7 +163,17 @@ label {
      font-size: 15px;
  }
 
+ .aggregate-sub-tab button:hover {
+     color: #ff1e00;
+     font-size: 15px;
+ }
+
  .tab button:active {
+     color: #ff9e00;
+     font-size: 16px;
+ }
+
+ .aggregate-sub-tab button:active {
      color: #ff9e00;
      font-size: 16px;
  }
@@ -167,6 +200,17 @@ label {
     width:98%;
     border-radius: 110px 10px 10px 10px;
     vertical-align: middle;
+ }
+
+ .aggregate-space-div {
+     background-color: hsla(20, 20%, 50%, 0.2);
+     position: relative;
+     top: 0%;
+     left: 1%;
+     height: 70%;
+     width: 98%;
+     border-radius: 110px 10px 10px 10px;
+     vertical-align: middle;
  }
 
  .system-names-container-div {

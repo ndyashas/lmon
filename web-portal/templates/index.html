@@ -21,6 +21,8 @@
       </div>
 
       <div class="tab">
+	<button class="tablinks" onclick="openTab(event, 'SSH')">SSH <div id="SSH-dot" class="dot-tab activate"></div> </button>
+	<button class="tablinks" onclick="openTab(event, 'Aggregate')">Aggregate Utils <div id="Aggregate-dot" class="dot-tab activate"></div> </button>
 	<button class="tablinks" onclick="openTab(event,'CPU')" id="defaultOpen">CPU Utilization <div id="CPU-dot" class="dot-tab activate"></div> </button>
 	<button class="tablinks" onclick="openTab(event,'RAM')">RAM Utilization <div id="RAM-dot" class="dot-tab activate"></div> </button>
 	<button class="tablinks" onclick="openTab(event,'Logins')">Login Information <div id="Logins-dot" class="dot-tab activate"></div> </button>
@@ -69,11 +71,20 @@
 	<div id="Logins" class="tabcontent" style="float:right; overflow-y: scroll; overflow-x: scroll;">
 	  <p>Login Stuff</p>
 	</div>
+
+	<div id="Aggregate" class="tabcontent">
+	  <!-- <p>Aggregate Stuff</p> -->
+	</div>
+
+	<div id="SSH" class="tabcontent">
+	  <!-- <p>SSH Stuff</p> -->
+	</div>
+	
       </div>
+
 	
     </div>
-    <script>
-
+    <script>    
       _FillSystemNamesContainer();
       _SetDefaultDateToYesterday();
       document.getElementById("defaultOpen").click();

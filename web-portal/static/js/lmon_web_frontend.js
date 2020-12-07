@@ -4,10 +4,27 @@ var RAM_ydata = {};
 var Logins_data = {};
 var MachineId_IpHostname = {};
 
+function InAggregate_openTab(event, subTabName){
+    console.log(subTabName);
+}
+
 function openTab(evt, tabName) {
     var i, tabcontent, tablinks, tabdots;
     var TabDotToACtivate;
-
+    
+    var date_div_elems = document.getElementsByClassName("date-div");
+    for (i=0; i<date_div_elems.length; i++) {
+	date_div_elems[i].style.display = "block";
+    }
+    var system_names_elems = document.getElementsByClassName("system-names-titles-div");
+    for (i=0; i<system_names_elems.length; i++) {
+	system_names_elems[i].style.display = "block";
+    }
+    var system_names_elems_c = document.getElementsByClassName("system-names-container-div");
+    for (i=0; i<system_names_elems_c.length; i++) {
+	system_names_elems_c[i].style.display = "block";
+    }
+    
     // Get all elements with class="tabcontent" and hide them
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i=0; i<tabcontent.length; i++) {
@@ -23,18 +40,19 @@ function openTab(evt, tabName) {
     // Get all elements with class="dot-tab" and remove the class "activate"
     tabdots = document.getElementsByClassName("dot-tab");
     for (i=0; i<tabdots.length; i++) {
-	tabdots[i].className = tabdots[i].className.replace("activate", "");
+    	tabdots[i].className = tabdots[i].className.replace("activate", "");
     }
-    
 
     // Show the current tab, and add an active class to the button that opened the tab
     document.getElementById(tabName).style.display = "block";
     //evt.currentTartget.className += " active";
-
+    
     // Activate the appropriate tab's dot
     TabDotToActivate = document.getElementById(tabName+"-dot");
+    console.log(TabDotToActivate);
     TabDotToActivate.className += "activate";
 
+    
     if(tabName == "CPU")
     {
 	_FillCPUChart();
@@ -48,8 +66,57 @@ function openTab(evt, tabName) {
     else if(tabName == "Logins")
     {
 	_FillLoginsChart();
-	CurrentTab = "Logins"
+	CurrentTab = "Logins";
     }
+    else if(tabName == "Aggregate")
+    {
+	_AggregateTabSelected();
+	CurrentTab = "Aggregate";
+    }
+    else if(tabName == "SSH")
+    {
+	_SSHTabSelected();
+	CurrentTab = "SSH";
+    }
+}
+
+function _SSHTabSelected()
+{
+    console.log("SSHTabSelected");
+    var i;
+    var date_div_elems = document.getElementsByClassName("date-div");
+    for (i=0; i<date_div_elems.length; i++) {
+	date_div_elems[i].style.display = "none";
+    }
+    var system_names_elems = document.getElementsByClassName("system-names-titles-div");
+    for (i=0; i<system_names_elems.length; i++) {
+	system_names_elems[i].style.display = "none";
+    }
+    var system_names_elems_c = document.getElementsByClassName("system-names-container-div");
+    for (i=0; i<system_names_elems_c.length; i++) {
+	system_names_elems_c[i].style.display = "none";
+    }
+    document.getElementById("SSH").style.display = "none";
+}
+
+function _AggregateTabSelected()
+{
+    console.log("AggregateTabSelected");
+    var i;
+    var date_div_elems = document.getElementsByClassName("date-div");
+    for (i=0; i<date_div_elems.length; i++) {
+	date_div_elems[i].style.display = "none";
+    }
+    var system_names_elems = document.getElementsByClassName("system-names-titles-div");
+    for (i=0; i<system_names_elems.length; i++) {
+	system_names_elems[i].style.display = "none";
+    }
+    var system_names_elems_c = document.getElementsByClassName("system-names-container-div");
+    for (i=0; i<system_names_elems_c.length; i++) {
+	system_names_elems_c[i].style.display = "none";
+    }
+    document.getElementById("Aggregate").style.display = "none";
+    
 }
 
 function _FillSystemNamesContainer()
