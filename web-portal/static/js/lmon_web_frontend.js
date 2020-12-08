@@ -80,6 +80,10 @@ function openTab(evt, tabName) {
     }
 }
 
+function check_ssh_now(btn_id_clicked){
+    console.log(btn_id_clicked.id+" clicked");
+}
+
 function _FillSSHData()
 {
     var failed_ssh = {"10.10.1.31":{"hostname":"bobsled", "user":"igroup"}, "10.10.1.32":{"hostname":"bobsled1", "user":"igroup1"}};
@@ -100,7 +104,7 @@ function _FillSSHData()
     success_ssh_caption.innerHTML = "<span style='font-size: 18px; color: #000080; font-family: Monospace;'>" + "<br>SSH succeeded for:<br>";
 
     var arrHead = new Array();
-    arrHead = ['Sl.No.', 'IP Address', 'Hostname', 'SSH tried for User'];
+    arrHead = ['Sl.No.', 'IP Address', 'Hostname', 'SSH tried for User', ''];
 
     var failed_ssh_tr = failed_ssh_table.insertRow(-1);
     var success_ssh_tr = success_ssh_table.insertRow(-1);
@@ -144,6 +148,16 @@ function _FillSSHData()
 	td_4 = failed_ssh_tr.insertCell(-1);
 	td_4.innerHTML = "<span style='font-size: 13px; color: #e74c3c; font-family: Monospace;text-align: center; display:block;'>" + failed_ssh[failed_IPs[c]]["user"];
 	failed_ssh_tr.appendChild(td_4);
+
+	var td_5 = document.createElement('td');
+	td_5 = failed_ssh_tr.insertCell(-1);
+	var btn = document.createElement('input');
+	btn.type = "button";
+	btn.id = failed_IPs[c]+"_check_now_btn";
+	btn.value = "check now";
+	btn.onclick = function() {check_ssh_now(this)};
+	td_5.appendChild(btn);
+	failed_ssh_tr.appendChild(td_5);
     }
     
     for(var c=0; c<success_IPs.length; c++) {
@@ -168,6 +182,16 @@ function _FillSSHData()
 	td_4 = success_ssh_tr.insertCell(-1);
 	td_4.innerHTML = "<span style='font-size: 13px; color: #28b463; font-family: Monospace;text-align: center; display:block;'>" + success_ssh[success_IPs[c]]["user"];
 	success_ssh_tr.appendChild(td_4);
+
+	var td_5 = document.createElement('td');
+	td_5 = success_ssh_tr.insertCell(-1);
+	var btn = document.createElement('input');
+	btn.type = "button";
+	btn.id = failed_IPs[c]+"_check_now_btn";
+	btn.value = "check now";
+	btn.onclick = function() {check_ssh_now(this)};
+	td_5.appendChild(btn);
+	success_ssh_tr.appendChild(td_5);
     }
     
     document.getElementById("SSH").appendChild(failed_ssh_table);
