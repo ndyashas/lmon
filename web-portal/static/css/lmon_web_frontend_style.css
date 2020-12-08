@@ -28,6 +28,16 @@ label {
     font-size: 15px;
 }
 
+#SSH {
+    color: #064771;
+    float:right;
+    height: 90%;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+}
+
 .main-div {
     background-color: #FFFFFF;
     border-radius: 25px;
