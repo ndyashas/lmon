@@ -40,16 +40,30 @@ def get_login_details(date, machine_id):
     return {date:login_details_dict}
 
 
-@app.route("/api/v1/ping-test/<string:machine_id>",
+@app.route("/api/v1/ping-test/<string:date>",
            methods=['GET'])
-def ping_test(machine_id):
-    ping_successful = util_obj.ping_test(machine_id)
+def get_ping_test(date):
+    ping_test_dict = util_obj.get_ping_ssh_test(date, "ping")
+    return {date:ping_test_dict}
+
+
+@app.route("/api/v1/ssh-test/<string:date>",
+           methods=['GET'])
+def get_ssh_test(date):
+    ssh_test_dict = util_obj.get_ssh_test(date)
+    return {date:ssh_test_dict}
+
+
+@app.route("/api/v1/live-ping-test/<string:machine_id>",
+           methods=['GET'])
+def get_live_ping_test(machine_id):
+    ping_successful = util_obj.get_ping_ssh_test(date, "ssh")
     return {machine_id:ping_successful}
 
 
-@app.route("/api/v1/ssh-test/<string:machine_id>",
+@app.route("/api/v1/live-ssh-test/<string:machine_id>",
            methods=['GET'])
-def ssh_test(machine_id):
+def get_live_ssh_test(machine_id):
     ssh_successful = util_obj.ssh_test(machine_id)
     return {machine_id:ssh_successful}
 

@@ -8,6 +8,7 @@ class Util:
     def __init__(self):
         self._lmon_path = os.path.join(os.environ.get('HOME'), ".lmon")
         self._log_dir = os.path.join(self._lmon_path, "log")
+        self._username = os.getlogin()
 
         self._hours_list = list(range(24))
 
@@ -30,9 +31,12 @@ class Util:
             if '@' in os.path.basename(path):
                 address = os.path.basename(path).split('@')[-1]
 
-            hostname = "unnamed"
-            with open(os.path.join(path, "hostname.txt"), 'r') as f:
-                hostname = f.read().strip()
+            hostname = "-"
+            try:
+                with open(os.path.join(path, "hostname.txt"), 'r') as f:
+                    hostname = f.read().strip()
+            except Exception as e:
+                hostname="-"
 
             machines[machine_id] = {'hostname':hostname, 'address':address}
         return machines
@@ -76,7 +80,7 @@ class Util:
                 toret = data_f.read().rstrip()
         return {machine_id:toret}
 
-    def ping_test(self, machine_id):
+    def get_live_ping_test(self, machine_id):
         response = os.system("ping -c 4 "+ machine_id)
         date = datetime.datetime.today().strftime("%Y-%m-%d")
         machine_dir = os.path.join(self._log_dir, date, machine_id)
@@ -91,7 +95,7 @@ class Util:
                 pass
             return False
 
-    def ssh_test(self, machine_id):
+    def get_live_ssh_test(self, machine_id):
         # response = os.system("nc -4 -d -z -w 15 "+ machine_id +" 22")
         response = os.system("ssh "+ machine_id +" 'hostname'")
         date = datetime.datetime.today().strftime("%Y-%m-%d")
@@ -106,3 +110,33 @@ class Util:
             except Exception as e:
                 pass
             return False
+
+    def get_ping_ssh_test(self, date, test_type):
+        test_file = "ping-down"
+        if test_type == "ssh":
+            test_file = "ssh-down"
+        failed_machines = dict()
+        passed_machines = dict()
+        machines_list =  glob.glob(os.path.join(self._log_dir, date, "*"))
+        for path in machines_list:
+            machine_id = os.path.basename(path)
+            address = machine_id
+            user = self._username
+            hostname = '-'
+            if '@' in os.path.basename(path):
+                address = os.path.basename(path).split('@')[-1]
+                user = os.path.basename(path).split('@')[-2]
+
+            try:
+                with open(os.path.join(path, "hostname.txt"), 'r') as f:
+                    hostname = f.read().strip()
+            except Exception as e:
+                hostname="-"
+
+            if os.path.isfile(os.path.join(path, test_file)):
+                failed_machines[address] = {'hostname':hostname, 'user':username}
+            else:
+                passed_machines[address] = {'hostname':hostname, 'user':username}
+
+        machines = {'passed':passed_machines, 'failed':failed_machines}
+        return machines
