@@ -50,21 +50,21 @@ def get_ping_test(date):
 @app.route("/api/v1/ssh-test/<string:date>",
            methods=['GET'])
 def get_ssh_test(date):
-    ssh_test_dict = util_obj.get_ssh_test(date)
+    ssh_test_dict = util_obj.get_ping_ssh_test(date, "ssh")
     return {date:ssh_test_dict}
 
 
 @app.route("/api/v1/live-ping-test/<string:machine_id>",
            methods=['GET'])
 def get_live_ping_test(machine_id):
-    ping_successful = util_obj.get_ping_ssh_test(date, "ssh")
+    ping_successful = util_obj.get_live_ping_test(machine_id)
     return {machine_id:ping_successful}
 
 
 @app.route("/api/v1/live-ssh-test/<string:machine_id>",
            methods=['GET'])
 def get_live_ssh_test(machine_id):
-    ssh_successful = util_obj.ssh_test(machine_id)
+    ssh_successful = util_obj.get_live_ssh_test(machine_id)
     return {machine_id:ssh_successful}
 
 
