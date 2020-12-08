@@ -121,11 +121,11 @@ class Util:
         for path in machines_list:
             machine_id = os.path.basename(path)
             address = machine_id
-            user = self._username
+            username = self._username
             hostname = '-'
             if '@' in os.path.basename(path):
                 address = os.path.basename(path).split('@')[-1]
-                user = os.path.basename(path).split('@')[-2]
+                username = os.path.basename(path).split('@')[-2]
 
             try:
                 with open(os.path.join(path, "hostname.txt"), 'r') as f:
