@@ -38,6 +38,28 @@ label {
     font-size: 15px;
 }
 
+.failed_ssh_table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.failed_ssh_table td, #failed_ssh_table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.failed_ssh_table tr:nth-child(even) {background-color: #f2f2f2;}
+
+.failed_ssh_table tr:hover {background-color: #d95;}
+
+.failed_ssh_table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #000020;
+  color: white;
+}
+
 .main-div {
     background-color: #FFFFFF;
     border-radius: 25px;

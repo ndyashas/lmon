@@ -84,34 +84,37 @@ function _FillSSHData()
 {
     var failed_ssh = {"10.10.1.31":{"hostname":"bobsled", "user":"igroup"}, "10.10.1.32":{"hostname":"bobsled1", "user":"igroup1"}};
     var success_ssh = {"10.10.1.31":{"hostname":"bobsled", "user":"igroup"}, "10.10.1.32":{"hostname":"bobsled1", "user":"igroup1"}};
-
+    
     var failed_ssh_table = document.createElement('table');
     failed_ssh_table.setAttribute('id', 'failed_ssh_table');
+    failed_ssh_table.setAttribute('class', 'failed_ssh_table');
     document.getElementById("SSH").appendChild(failed_ssh_table);
-    console.log(document.getElementById('failed_ssh_table'));
+    //console.log(document.getElementById('failed_ssh_table'));
+    var failed_ssh_caption = document.getElementById('failed_ssh_table').createCaption();
+    failed_ssh_caption.innerHTML = "<span style='font-size: 18px; color: #000080; font-family: Monospace;'>" + "SSH failed for:<br>";
 
     var success_ssh_table = document.createElement('table');
     success_ssh_table.setAttribute('id', 'success_ssh_table');
-    //document.getElementById("SSH").appendChild(success_ssh_table);
+    document.getElementById("SSH").appendChild(success_ssh_table);
+    var success_ssh_caption = document.getElementById('success_ssh_table').createCaption();
+    success_ssh_caption.innerHTML = "<span style='font-size: 18px; color: #000080; font-family: Monospace;'>" + "<br>SSH succeeded for:<br>";
 
     var arrHead = new Array();
     arrHead = ['Sl.No.', 'IP Address', 'Hostname', 'SSH tried for User'];
 
     var failed_ssh_tr = failed_ssh_table.insertRow(-1);
     var success_ssh_tr = success_ssh_table.insertRow(-1);
-
-    document.getElementById("SSH").innerHTML += "<span style='font-size: 18px; color: #000080; font-family: Monospace;'>" + "SSH failed for:<br>";
     
     //table header
     for(var h=0; h<arrHead.length; h++){
 	var failed_ssh_th = document.createElement('th');
-	failed_ssh_th.innerHTML = "<span style='font-size: 15px; color: #7b241c; font-family: Monospace;'>" + arrHead[h];
+	failed_ssh_th.innerHTML = "<span style='font-size: 15px; color: #7b241c; font-family: Monospace;'>" + "  "+arrHead[h]+"  ";
 	failed_ssh_tr.appendChild(failed_ssh_th);
     }
     
     for(var h=0; h<arrHead.length;h++){
 	var success_ssh_th = document.createElement('th');
-	success_ssh_th.innerHTML = "<span style='font-size: 15px; color: #145a32; font-family: Monospace;'>" + arrHead[h];
+	success_ssh_th.innerHTML = "<span style='font-size: 15px; color: #145a32; font-family: Monospace;'>" + "  "+arrHead[h]+"  ";
 	success_ssh_tr.appendChild(success_ssh_th);
     }
 
@@ -124,23 +127,23 @@ function _FillSSHData()
 
 	var td_1 = document.createElement('td');
 	td_1 = failed_ssh_tr.insertCell(-1);
-	td_1.innerHTML = "<span style='font-size: 13px; color: #e74c3c; font-family: Monospace;'>" + (c+1).toString();
-	//failed_ssh_tr.appendChild(td_1);
+	td_1.innerHTML = "<span style='font-size: 13px; color: #e74c3c; font-family: Monospace;text-align: center; display:block;'>" + (c+1).toString();
+	failed_ssh_tr.appendChild(td_1);
 
 	var td_2 = document.createElement('td');
 	td_2 = failed_ssh_tr.insertCell(-1);
-	td_2.innerHTML = "<span style='font-size: 13px; color: #e74c3c; font-family: Monospace;'>" + failed_IPs[c];
-	//failed_ssh_tr.appendChild(td_2);
+	td_2.innerHTML = "<span style='font-size: 13px; color: #e74c3c; font-family: Monospace;text-align: center; display:block;'>" + failed_IPs[c];
+	failed_ssh_tr.appendChild(td_2);
 
 	var td_3 = document.createElement('td');
 	td_3 = failed_ssh_tr.insertCell(-1);
-	td_3.innerHTML = "<span style='font-size: 13px; color: #e74c3c; font-family: Monospace;'>" + failed_ssh[failed_IPs[c]]["hostname"];
-	//failed_ssh_tr.appendChild(td_3);
+	td_3.innerHTML = "<span style='font-size: 13px; color: #e74c3c; font-family: Monospace;text-align: center; display:block;'>" + failed_ssh[failed_IPs[c]]["hostname"];
+	failed_ssh_tr.appendChild(td_3);
 
 	var td_4 = document.createElement('td');
 	td_4 = failed_ssh_tr.insertCell(-1);
-	td_4.innerHTML = "<span style='font-size: 13px; color: #e74c3c; font-family: Monospace;'>" + failed_ssh[failed_IPs[c]]["user"];
-	//failed_ssh_tr.appendChild(td_4);
+	td_4.innerHTML = "<span style='font-size: 13px; color: #e74c3c; font-family: Monospace;text-align: center; display:block;'>" + failed_ssh[failed_IPs[c]]["user"];
+	failed_ssh_tr.appendChild(td_4);
     }
     
     for(var c=0; c<success_IPs.length; c++) {
@@ -148,28 +151,31 @@ function _FillSSHData()
 
 	var td_1 = document.createElement('td');
 	td_1 = success_ssh_tr.insertCell(-1);
-	td_1.innerHTML = "<span style='font-size: 13px; color: #28b463; font-family: Monospace;'>" + (c+1).toString();
-	//failed_ssh_tr.appendChild(td_1);
+	td_1.innerHTML = "<span style='font-size: 13px; color: #28b463; font-family: Monospace;text-align: center; display:block;'>" + (c+1).toString();
+	success_ssh_tr.appendChild(td_1);
 
 	var td_2 = document.createElement('td');
 	td_2 = success_ssh_tr.insertCell(-1);
-	td_2.innerHTML = "<span style='font-size: 13px; color: #28b463; font-family: Monospace;'>" + success_IPs[c];
-	//failed_ssh_tr.appendChild(td_2);
+	td_2.innerHTML = "<span style='font-size: 13px; color: #28b463; font-family: Monospace;text-align: center; display:block;'>" + success_IPs[c];
+	success_ssh_tr.appendChild(td_2);
 
 	var td_3 = document.createElement('td');
 	td_3 = success_ssh_tr.insertCell(-1);
-	td_3.innerHTML = "<span style='font-size: 13px; color: #28b463; font-family: Monospace;'>" + success_ssh[success_IPs[c]]["hostname"];
-	//failed_ssh_tr.appendChild(td_3);
+	td_3.innerHTML = "<span style='font-size: 13px; color: #28b463; font-family: Monospace;text-align: center; display:block;'>" + success_ssh[success_IPs[c]]["hostname"];
+	success_ssh_tr.appendChild(td_3);
 
 	var td_4 = document.createElement('td');
 	td_4 = success_ssh_tr.insertCell(-1);
-	td_4.innerHTML = "<span style='font-size: 13px; color: #28b463; font-family: Monospace;'>" + success_ssh[success_IPs[c]]["user"];
-	//failed_ssh_tr.appendChild(td_4);
+	td_4.innerHTML = "<span style='font-size: 13px; color: #28b463; font-family: Monospace;text-align: center; display:block;'>" + success_ssh[success_IPs[c]]["user"];
+	success_ssh_tr.appendChild(td_4);
     }
-
+    
     document.getElementById("SSH").appendChild(failed_ssh_table);
-    document.getElementById("SSH").innerHTML += "<span style='font-size: 18px; color: #000080; '>" + "<br>SSH succeeded for:<br>";
+    //document.getElementById("SSH").innerHTML += "<span style='font-size: 18px; color: #000080; '>" + "<br>SSH succeeded for:<br>";
     document.getElementById("SSH").appendChild(success_ssh_table);
+    
+    document.getElementById('failed_ssh_table').border=1;
+    document.getElementById('success_ssh_table').border=1;
 
 }
 
