@@ -82,12 +82,20 @@ function openTab(evt, tabName) {
 
 function check_ssh_now(btn_id_clicked){
     console.log(btn_id_clicked.id+" clicked");
+    //request status of the IP (btn_id_clicked.id.replace("_check_now_btn", ""))
+    requested_status = false;
+    if(requested_status){
+	document.getElementById(btn_id_clicked.id.replace("_btn", "_status")).innerHTML = "<span style='font-size: 13px; color: #28b463; text-align: center; display:block;'>" + "SSH Succeeded Now";
+    }
+    else{
+	document.getElementById(btn_id_clicked.id.replace("_btn", "_status")).innerHTML = "<span style='font-size: 13px; color: #e74c3c; text-align: center; display:block;'>" + "SSH Failed Now";
+    }
 }
 
 function _FillSSHData()
 {
     var failed_ssh = {"10.10.1.31":{"hostname":"bobsled", "user":"igroup"}, "10.10.1.32":{"hostname":"bobsled1", "user":"igroup1"}};
-    var success_ssh = {"10.10.1.31":{"hostname":"bobsled", "user":"igroup"}, "10.10.1.32":{"hostname":"bobsled1", "user":"igroup1"}};
+    var success_ssh = {"10.10.1.33":{"hostname":"bobsled", "user":"igroup"}, "10.10.1.34":{"hostname":"bobsled1", "user":"igroup1"}};
     
     var failed_ssh_table = document.createElement('table');
     failed_ssh_table.setAttribute('id', 'failed_ssh_table');
@@ -104,7 +112,7 @@ function _FillSSHData()
     success_ssh_caption.innerHTML = "<span style='font-size: 18px; color: #000080; font-family: Monospace;'>" + "<br>SSH succeeded for:<br>";
 
     var arrHead = new Array();
-    arrHead = ['Sl.No.', 'IP Address', 'Hostname', 'SSH tried for User', ''];
+    arrHead = ['Sl.No.', 'IP Address', 'Hostname', 'SSH tried for User', '', 'Check now status'];
 
     var failed_ssh_tr = failed_ssh_table.insertRow(-1);
     var success_ssh_tr = success_ssh_table.insertRow(-1);
@@ -128,6 +136,7 @@ function _FillSSHData()
     
     for(var c=0; c<failed_IPs.length; c++) {
 	failed_ssh_tr = failed_ssh_table.insertRow(-1);
+	failed_ssh_tr.id="failed_ssh_tr_"+failed_IPs[c];
 
 	var td_1 = document.createElement('td');
 	td_1 = failed_ssh_tr.insertCell(-1);
@@ -158,6 +167,12 @@ function _FillSSHData()
 	btn.onclick = function() {check_ssh_now(this)};
 	td_5.appendChild(btn);
 	failed_ssh_tr.appendChild(td_5);
+
+	var td_6 = document.createElement('td');
+	td_6 = failed_ssh_tr.insertCell(-1);
+	td_6.innerHTML = "";
+	td_6.id = failed_IPs[c]+"_check_now_status"
+	failed_ssh_tr.appendChild(td_6);
     }
     
     for(var c=0; c<success_IPs.length; c++) {
@@ -187,11 +202,17 @@ function _FillSSHData()
 	td_5 = success_ssh_tr.insertCell(-1);
 	var btn = document.createElement('input');
 	btn.type = "button";
-	btn.id = failed_IPs[c]+"_check_now_btn";
+	btn.id = success_IPs[c]+"_check_now_btn";
 	btn.value = "check now";
 	btn.onclick = function() {check_ssh_now(this)};
 	td_5.appendChild(btn);
 	success_ssh_tr.appendChild(td_5);
+
+	var td_6 = document.createElement('td');
+	td_6 = success_ssh_tr.insertCell(-1);
+	td_6.innerHTML = "";
+	td_6.id = success_IPs[c]+"_check_now_status"
+	success_ssh_tr.appendChild(td_6);
     }
     
     document.getElementById("SSH").appendChild(failed_ssh_table);
