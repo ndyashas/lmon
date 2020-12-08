@@ -664,4 +664,10 @@ function LogDateModified(event)
     CPU_ydata = {};
     RAM_ydata = {};
     document.getElementById("Logins").innerHTML = "";
+    if(CurrentTab == "SSH")
+    {
+	_SSHTabSelected();
+	CurrentTab = "SSH";
+	console.log("updated it again!!!")
+    }
 }
