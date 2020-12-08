@@ -135,9 +135,9 @@ class Util:
                 hostname="-"
 
             if os.path.isfile(os.path.join(path, test_file)):
-                failed_machines[address] = {'hostname':hostname, 'user':username}
+                failed_machines[address] = {'hostname':hostname, 'user':username, 'mac': machine_id}
             else:
-                passed_machines[address] = {'hostname':hostname, 'user':username}
+                passed_machines[address] = {'hostname':hostname, 'user':username, 'mac': machine_id}
 
         machines = {'passed':passed_machines, 'failed':failed_machines}
         return machines
