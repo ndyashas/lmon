@@ -84,12 +84,14 @@ function check_ssh_now(btn_id_clicked){
     console.log(btn_id_clicked.id+" clicked");
     //request status of the IP (btn_id_clicked.id.replace("_check_now_btn", ""))
     xhr_object = new XMLHttpRequest();
-    xhr_object.onload = check_ssh_now_waiting_response();
+    xhr_object.onload = check_ssh_now_waiting_response;
+    xhr_object.btn_id_clicked=btn_id_clicked;
     xhr_object.open('GET', 'http://'+document.BACKEND_URL+'/api/v1/live-ssh-test/'+btn_id_clicked.machine_id);
     xhr_object.send();
 }
 
-function check_ssh_now_response_recieved(requested_status){
+function check_ssh_now_response_recieved(requested_status, btn_id_clicked){
+    console.log(btn_id_clicked);
     //requested_status = false;
     if(requested_status){
 	document.getElementById(btn_id_clicked.id.replace("_btn", "_status")).innerHTML = "<span style='font-size: 13px; color: #28b463; text-align: center; display:block;'>" + "SSH Succeeded Now";
@@ -105,9 +107,10 @@ function check_ssh_now_waiting_response(){
 	var res = this.responseText;
 	var resJSON = JSON.parse(res);
 	var requested_status = resJSON[Object.keys(resJSON)[0]];
+	console.log(requested_status);
 	if(CurrentTab == "SSH")
 	{
-	    check_ssh_now_response_recieved(requested_status);
+	    check_ssh_now_response_recieved(requested_status, this.btn_id_clicked);
 	}
     }
 }
@@ -239,6 +242,7 @@ function _FillSSHData_internal(failed_ssh, success_ssh)
 	var btn = document.createElement('input');
 	btn.type = "button";
 	btn.id = success_IPs[c]+"_check_now_btn";
+	btn.machine_id = success_ssh[success_IPs[c]]["mac"];
 	btn.value = "check now";
 	btn.onclick = function() {check_ssh_now(this)};
 	td_5.appendChild(btn);
