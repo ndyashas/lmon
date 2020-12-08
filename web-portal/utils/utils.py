@@ -97,6 +97,7 @@ class Util:
 
     def get_live_ssh_test(self, machine_id):
         # response = os.system("nc -4 -d -z -w 15 "+ machine_id +" 22")
+        print(machine_id)
         response = os.system("ssh "+ machine_id +" 'hostname'")
         date = datetime.datetime.today().strftime("%Y-%m-%d")
         machine_dir = os.path.join(self._log_dir, date, machine_id)
