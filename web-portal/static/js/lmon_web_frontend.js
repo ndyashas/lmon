@@ -94,8 +94,23 @@ function check_ssh_now(btn_id_clicked){
 
 function _FillSSHData()
 {
-    var failed_ssh = {"10.10.1.31":{"hostname":"bobsled", "user":"igroup"}, "10.10.1.32":{"hostname":"bobsled1", "user":"igroup1"}};
-    var success_ssh = {"10.10.1.33":{"hostname":"bobsled", "user":"igroup"}, "10.10.1.34":{"hostname":"bobsled1", "user":"igroup1"}};
+    if(this.readyState == 4 && this.status == 200)
+    {
+	var res = this.responseText;
+	var resJSON = JSON.parse(res);
+	var failed_ssh = resJSON[Object.keys(resJSON)[0]]["failed"];
+	var passed_ssh = resJSON[Object.keys(resJSON)[0]]["passed"];
+	if(CurrentTab == "SSH")
+	{
+	    _FillSSHData_internal(failed_ssh, passed_ssh);
+	}
+    }    
+}
+
+function _FillSSHData_internal(failed_ssh, success_ssh)
+{
+    //var failed_ssh = {"10.10.1.31":{"hostname":"bobsled", "user":"igroup"}, "10.10.1.32":{"hostname":"bobsled1", "user":"igroup1"}};
+    //var success_ssh = {"10.10.1.33":{"hostname":"bobsled", "user":"igroup"}, "10.10.1.34":{"hostname":"bobsled1", "user":"igroup1"}};
     
     var failed_ssh_table = document.createElement('table');
     failed_ssh_table.setAttribute('id', 'failed_ssh_table');
@@ -243,9 +258,13 @@ function _SSHTabSelected()
     // document.getElementById("SSH").style.display = "none";
 
     document.getElementById("SSH").innerHTML = "";
-    _FillSSHData();
+    //_FillSSHData();
     
-    
+    //Update the number of systems
+    xhr_object_ssh = new XMLHttpRequest();
+    xhr_object_ssh.onload = _FillSSHData;
+    xhr_object_ssh.open('GET', 'http://'+document.BACKEND_URL+'/api/v1/ssh-test/'+document.getElementById('date-input').value);
+    xhr_object_ssh.send();
 }
 
 
