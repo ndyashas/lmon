@@ -382,6 +382,8 @@ function _SSHTabSelected()
 
     var ssh_password_input = document.createElement('INPUT');
     ssh_password_input.id = 'ssh-password-input';
+    ssh_password_input.setAttribute("type", "password");
+    ssh_password_input.setAttribute("value", "pswtext");
     document.getElementById('other-machine-live-ssh-check-div').appendChild(ssh_password_input);
     ssh_password_input.style.position = 'relative';
     ssh_password_input.style.top = '-55%';
