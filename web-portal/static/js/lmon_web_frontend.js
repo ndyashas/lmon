@@ -840,6 +840,11 @@ function UpdateNumberOfSystems()
 
 function LogDateModified(event)
 {
+    var other_machine_live_ssh_check_div = document.getElementById('other-machine-live-ssh-check-div');
+    if (other_machine_live_ssh_check_div != null){
+	other_machine_live_ssh_check_div.remove();
+    }
+    
     //Update the number of systems
     xhr_object = new XMLHttpRequest();
     xhr_object.onload = UpdateNumberOfSystems;
