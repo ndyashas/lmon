@@ -112,6 +112,13 @@ class Util:
                 pass
             return False
 
+    def get_live_ssh_test_other_machines(IP, username, password):
+        response = os.system("sshpass -p '"+password+"' ssh "+username+"@"+IP+" 'hostname'")
+        if response == 0:
+            return True
+        else:
+            return False
+
     def get_ping_ssh_test(self, date, test_type):
         test_file = "ping-down"
         if test_type == "ssh":

@@ -68,6 +68,13 @@ def get_live_ssh_test(machine_id):
     return {machine_id:ssh_successful}
 
 
+@app.route("/api/v1/live-ssh-test-other-machines/<string:IP>/<string:username>/<string:password>",
+           methods=['GET'])
+def get_live_ssh_test_other_machines(IP, username, password):
+    ssh_successful = util_obj.get_live_ssh_test_other_machines(IP, username, password)
+    return {IP:ssh_successful}
+
+
 @app.route("/")
 def index():
     return render_template("index.html", backend_url=backend_url)
