@@ -490,17 +490,17 @@ function _AggregateTabSelected()
     var i;
     var date_div_elems = document.getElementsByClassName("date-div");
     for (i=0; i<date_div_elems.length; i++) {
-	date_div_elems[i].style.display = "none";
+	date_div_elems[i].style.visibility = "hidden";
     }
     var system_names_elems = document.getElementsByClassName("system-names-titles-div");
     for (i=0; i<system_names_elems.length; i++) {
-	system_names_elems[i].style.display = "none";
+	system_names_elems[i].style.visibility = "hidden";
     }
     var system_names_elems_c = document.getElementsByClassName("system-names-container-div");
     for (i=0; i<system_names_elems_c.length; i++) {
-	system_names_elems_c[i].style.display = "none";
+	system_names_elems_c[i].style.visibility = "hidden";
     }
-    document.getElementById("Aggregate").style.display = "none";
+    document.getElementById("Aggregate").style.visibility = "hidden";
     
 }
 
