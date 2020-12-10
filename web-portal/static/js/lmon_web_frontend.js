@@ -389,14 +389,29 @@ function _SSHTabSelected()
     ssh_password_input.style.height = '4%';
     ssh_password_input.style.width = '55%';
 
+    var ssh_response = document.createElement('div');
+    ssh_response.id = 'ssh-response';
+    document.getElementById('other-machine-live-ssh-check-div').appendChild(ssh_response);
+    ssh_response.style.backgroundColor = 'transparent';
+    ssh_response.style.position = 'relative';
+    ssh_response.style.top = '-53%';
+    ssh_response.style.left = '0%';
+    ssh_response.style.height = '13%';
+    ssh_response.innerHTML = "";
+    ssh_response.style.color = '#064771';
+    ssh_response.style.fontFamily = "Avantgarde, 'TeX Gyre Adventor', 'URW Gothic L', sans-serif";
+    ssh_response.style.fontSize =  '15px';
+    ssh_response.style.fontWeight = '900';
+    ssh_response.style.textAlign = 'center';
+
     var other_machine_live_ssh_check_btn = document.createElement("BUTTON");
     var other_machine_live_ssh_check_btn_text = document.createTextNode("Check Now!");
     other_machine_live_ssh_check_btn.appendChild(other_machine_live_ssh_check_btn_text);
     document.getElementById('other-machine-live-ssh-check-div').appendChild(other_machine_live_ssh_check_btn);
     other_machine_live_ssh_check_btn.style.backgroundColor = 'whitesmoke';
     other_machine_live_ssh_check_btn.style.position = 'relative';
-    other_machine_live_ssh_check_btn.style.top = '-33%';
-    other_machine_live_ssh_check_btn.style.left = '-22%';
+    other_machine_live_ssh_check_btn.style.top = '-50%';
+    other_machine_live_ssh_check_btn.style.left = '32%';
     other_machine_live_ssh_check_btn.style.height = '9%';
     other_machine_live_ssh_check_btn.style.color = '#064771';
     other_machine_live_ssh_check_btn.style.fontFamily = "Avantgarde, 'TeX Gyre Adventor', 'URW Gothic L', sans-serif";
