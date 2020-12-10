@@ -11,6 +11,11 @@ function InAggregate_openTab(event, subTabName){
 function openTab(evt, tabName) {
     var i, tabcontent, tablinks, tabdots;
     var TabDotToACtivate;
+
+    var other_machine_live_ssh_check_div = document.getElementById('other-machine-live-ssh-check-div');
+    if (other_machine_live_ssh_check_div != null){
+	other_machine_live_ssh_check_div.remove();
+    }
     
     var date_div_elems = document.getElementsByClassName("date-div");
     for (i=0; i<date_div_elems.length; i++) {
@@ -274,15 +279,130 @@ function _SSHTabSelected()
     // for (i=0; i<date_div_elems.length; i++) {
     // 	date_div_elems[i].style.display = "none";
     // }
-    // var system_names_elems = document.getElementsByClassName("system-names-titles-div");
-    // for (i=0; i<system_names_elems.length; i++) {
-    // 	system_names_elems[i].style.display = "none";
-    // }
-    // var system_names_elems_c = document.getElementsByClassName("system-names-container-div");
-    // for (i=0; i<system_names_elems_c.length; i++) {
-    // 	system_names_elems_c[i].style.display = "none";
-    // }
+    var system_names_elems = document.getElementsByClassName("system-names-titles-div");
+    for (i=0; i<system_names_elems.length; i++) {
+    	system_names_elems[i].style.visibility = 'hidden';
+    }
+    var system_names_elems_c = document.getElementsByClassName("system-names-container-div");
+    for (i=0; i<system_names_elems_c.length; i++) {
+    	system_names_elems_c[i].style.visibility = 'hidden';
+    }
     // document.getElementById("SSH").style.display = "none";
+
+    var other_machine_live_ssh_check_div = document.createElement('div');
+    other_machine_live_ssh_check_div.id = 'other-machine-live-ssh-check-div';
+    document.getElementsByClassName('main-space-div')[0].appendChild(other_machine_live_ssh_check_div);
+    other_machine_live_ssh_check_div.style.backgroundColor = 'hsla(210, 20%, 50%, 0.3)';
+    other_machine_live_ssh_check_div.style.position = 'relative';
+    other_machine_live_ssh_check_div.style.top = '28%';
+    other_machine_live_ssh_check_div.style.left = '3%';
+    other_machine_live_ssh_check_div.style.height = '57%'
+    other_machine_live_ssh_check_div.style.width = '25%';
+
+    var other_machine_live_ssh_check_title = document.createElement('div');
+    other_machine_live_ssh_check_title.id = 'other-machine-live-ssh-check-title';
+    document.getElementById('other-machine-live-ssh-check-div').appendChild(other_machine_live_ssh_check_title);
+    other_machine_live_ssh_check_title.style.backgroundColor = 'transparent';
+    other_machine_live_ssh_check_title.style.position = 'relative';
+    other_machine_live_ssh_check_title.style.top = '5%';
+    other_machine_live_ssh_check_title.style.left = '-30%';
+    other_machine_live_ssh_check_title.style.height = '10%';
+    other_machine_live_ssh_check_title.style.width = '100%';
+    other_machine_live_ssh_check_title.innerHTML = " Live SSH Check";
+    other_machine_live_ssh_check_title.style.color = '#064771';
+    other_machine_live_ssh_check_title.style.fontFamily = "Avantgarde, 'TeX Gyre Adventor', 'URW Gothic L', sans-serif";
+    other_machine_live_ssh_check_title.style.fontSize =  '14px';
+    other_machine_live_ssh_check_title.style.fontWeight = '700';
+    other_machine_live_ssh_check_title.style.fontVariant = 'small-caps';
+    other_machine_live_ssh_check_title.style.textAlign = 'center';
+
+
+    var ssh_IP_title = document.createElement('div');
+    ssh_IP_title.id = 'ssh-IP-title';
+    document.getElementById('other-machine-live-ssh-check-div').appendChild(ssh_IP_title);
+    ssh_IP_title.style.backgroundColor = 'transparent';
+    ssh_IP_title.style.position = 'relative';
+    ssh_IP_title.style.top = '13%';
+    ssh_IP_title.style.left = '-65%';
+    ssh_IP_title.style.height = '9%';
+    ssh_IP_title.innerHTML = " IP Address:";
+    ssh_IP_title.style.color = '#064771';
+    ssh_IP_title.style.fontFamily = "Avantgarde, 'TeX Gyre Adventor', 'URW Gothic L', sans-serif";
+    ssh_IP_title.style.fontSize =  '15px';
+    ssh_IP_title.style.fontWeight = '400';
+    ssh_IP_title.style.textAlign = 'right';
+
+    var ssh_username_title = document.createElement('div');
+    ssh_username_title.id = 'ssh-username-title';
+    document.getElementById('other-machine-live-ssh-check-div').appendChild(ssh_username_title);
+    ssh_username_title.style.backgroundColor = 'transparent';
+    ssh_username_title.style.position = 'relative';
+    ssh_username_title.style.top = '23%';
+    ssh_username_title.style.left = '-65%';
+    ssh_username_title.style.height = '9%';
+    ssh_username_title.innerHTML = " Username:";
+    ssh_username_title.style.color = '#064771';
+    ssh_username_title.style.fontFamily = "Avantgarde, 'TeX Gyre Adventor', 'URW Gothic L', sans-serif";
+    ssh_username_title.style.fontSize =  '15px';
+    ssh_username_title.style.fontWeight = '400';
+    ssh_username_title.style.textAlign = 'right';
+
+    var ssh_password_title = document.createElement('div');
+    ssh_password_title.id = 'ssh-password-title';
+    document.getElementById('other-machine-live-ssh-check-div').appendChild(ssh_password_title);
+    ssh_password_title.style.backgroundColor = 'transparent';
+    ssh_password_title.style.position = 'relative';
+    ssh_password_title.style.top = '33%';
+    ssh_password_title.style.left = '-65%';
+    ssh_password_title.style.height = '9%';
+    ssh_password_title.innerHTML = " Password:";
+    ssh_password_title.style.color = '#064771';
+    ssh_password_title.style.fontFamily = "Avantgarde, 'TeX Gyre Adventor', 'URW Gothic L', sans-serif";
+    ssh_password_title.style.fontSize =  '15px';
+    ssh_password_title.style.fontWeight = '400';
+    ssh_password_title.style.textAlign = 'right';
+
+    var ssh_IP_input = document.createElement('INPUT');
+    ssh_IP_input.id = 'ssh-IP-input';
+    document.getElementById('other-machine-live-ssh-check-div').appendChild(ssh_IP_input);
+    ssh_IP_input.style.position = 'relative';
+    ssh_IP_input.style.top = '-65%';
+    ssh_IP_input.style.left = '37%';
+    ssh_IP_input.style.height = '4%';
+    ssh_IP_input.style.width = '55%';
+
+    var ssh_username_input = document.createElement('INPUT');
+    ssh_username_input.id = 'ssh-username-input';
+    document.getElementById('other-machine-live-ssh-check-div').appendChild(ssh_username_input);
+    ssh_username_input.style.position = 'relative';
+    ssh_username_input.style.top = '-60%';
+    ssh_username_input.style.left = '37%';
+    ssh_username_input.style.height = '4%';
+    ssh_username_input.style.width = '55%';
+
+    var ssh_password_input = document.createElement('INPUT');
+    ssh_password_input.id = 'ssh-password-input';
+    document.getElementById('other-machine-live-ssh-check-div').appendChild(ssh_password_input);
+    ssh_password_input.style.position = 'relative';
+    ssh_password_input.style.top = '-55%';
+    ssh_password_input.style.left = '37%';
+    ssh_password_input.style.height = '4%';
+    ssh_password_input.style.width = '55%';
+
+    var other_machine_live_ssh_check_btn = document.createElement("BUTTON");
+    var other_machine_live_ssh_check_btn_text = document.createTextNode("Check Now!");
+    other_machine_live_ssh_check_btn.appendChild(other_machine_live_ssh_check_btn_text);
+    document.getElementById('other-machine-live-ssh-check-div').appendChild(other_machine_live_ssh_check_btn);
+    other_machine_live_ssh_check_btn.style.backgroundColor = 'whitesmoke';
+    other_machine_live_ssh_check_btn.style.position = 'relative';
+    other_machine_live_ssh_check_btn.style.top = '-33%';
+    other_machine_live_ssh_check_btn.style.left = '-22%';
+    other_machine_live_ssh_check_btn.style.height = '9%';
+    other_machine_live_ssh_check_btn.style.color = '#064771';
+    other_machine_live_ssh_check_btn.style.fontFamily = "Avantgarde, 'TeX Gyre Adventor', 'URW Gothic L', sans-serif";
+    other_machine_live_ssh_check_btn.style.fontSize =  '15px';
+    other_machine_live_ssh_check_btn.style.fontWeight = '700';
+    other_machine_live_ssh_check_btn.style.textAlign = 'center';
 
     document.getElementById("SSH").innerHTML = "";
     //_FillSSHData();
