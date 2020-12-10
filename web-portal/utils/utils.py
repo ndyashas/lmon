@@ -112,8 +112,8 @@ class Util:
                 pass
             return False
 
-    def get_live_ssh_test_other_machines(IP, username, password):
-        response = os.system("sshpass -p '"+password+"' ssh "+username+"@"+IP+" 'hostname'")
+    def get_live_ssh_test_other_machines(self, address, username, password):
+        response = os.system("sshpass -p '" + password + "' ssh " + username + "@" + address + " 'hostname'")
         if response == 0:
             return True
         else:

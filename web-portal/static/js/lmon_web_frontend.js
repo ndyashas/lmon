@@ -394,13 +394,13 @@ function _SSHTabSelected()
     document.getElementById('other-machine-live-ssh-check-div').appendChild(ssh_response);
     ssh_response.style.backgroundColor = 'transparent';
     ssh_response.style.position = 'relative';
-    ssh_response.style.top = '-53%';
+    ssh_response.style.top = '-50%';
     ssh_response.style.left = '0%';
     ssh_response.style.height = '13%';
     ssh_response.innerHTML = "";
     ssh_response.style.color = '#064771';
     ssh_response.style.fontFamily = "Avantgarde, 'TeX Gyre Adventor', 'URW Gothic L', sans-serif";
-    ssh_response.style.fontSize =  '15px';
+    ssh_response.style.fontSize =  '17px';
     ssh_response.style.fontWeight = '900';
     ssh_response.style.textAlign = 'center';
 
@@ -418,17 +418,68 @@ function _SSHTabSelected()
     other_machine_live_ssh_check_btn.style.fontSize =  '15px';
     other_machine_live_ssh_check_btn.style.fontWeight = '700';
     other_machine_live_ssh_check_btn.style.textAlign = 'center';
+    other_machine_live_ssh_check_btn.onclick = _OtherMachineLiveSSHCheckBtnClicked;
 
     document.getElementById("SSH").innerHTML = "";
     //_FillSSHData();
     
-    //Update the number of systems
+    //SSH-test
     xhr_object_ssh = new XMLHttpRequest();
     xhr_object_ssh.onload = _FillSSHData;
     xhr_object_ssh.open('GET', 'http://'+document.BACKEND_URL+'/api/v1/ssh-test/'+document.getElementById('date-input').value);
     xhr_object_ssh.send();
 }
 
+function _OtherMachineLiveSSHCheckBtnClicked()
+{
+    var IP = document.getElementById('ssh-IP-input').value;
+    var username = document.getElementById('ssh-username-input').value;
+    var password = document.getElementById('ssh-password-input').value;
+
+    var ssh_response = document.getElementById('ssh-response');
+    ssh_response.innerHTML = "";
+
+    if(IP.trim() == ""){
+	ssh_response.innerHTML = "<span style='color: #ff0000;'>" + "Enter IP!";
+    }
+    else if(username.trim() == ""){
+	ssh_response.innerHTML = "<span style='color: #ff0000;'>" + "Enter Username!";
+    }
+    else if(password.trim() == ""){
+	ssh_response.innerHTML = "<span style='color: #ff0000;'>" + "Enter Password!";
+    }
+    else {
+	//SSH-test
+	xhr_object_ssh = new XMLHttpRequest();
+	xhr_object_ssh.onload = _OtherMachineLiveSSHCheckWaitingResponse;
+	xhr_object_ssh.open('GET', 'http://'+document.BACKEND_URL+'/api/v1/live-ssh-test-other-machines/'+IP+'/'+username+'/'+password);
+	xhr_object_ssh.send();
+    }
+}
+
+function _OtherMachineLiveSSHCheckWaitingResponse(){
+    if(this.readyState == 4 && this.status == 200)
+    {
+	var res = this.responseText;
+	var resJSON = JSON.parse(res);
+	var requested_status = resJSON[Object.keys(resJSON)[0]];
+	console.log(requested_status);
+	if(CurrentTab == "SSH")
+	{
+	    _OtherMachineLiveSSHCheckRecievedResponse(requested_status);
+	}
+    }    
+}
+
+function _OtherMachineLiveSSHCheckRecievedResponse(requested_status){
+    var ssh_response = document.getElementById('ssh-response');
+    if(requested_status == true){
+	ssh_response.innerHTML = "<span style='color: #145a32;'>" + "SSH Successful!";
+    }
+    else{
+	ssh_response.innerHTML = "<span style='color: #ff0000;'>" + "SSH Failed..";
+    }
+}
 
 
 function _AggregateTabSelected()
