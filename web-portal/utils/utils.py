@@ -2,6 +2,7 @@ import os
 import csv
 import glob
 import datetime
+import statistics
 
 class Util:
 
@@ -148,3 +149,58 @@ class Util:
 
         machines = {'passed':passed_machines, 'failed':failed_machines}
         return machines
+
+    def get_average_stats(self, start_date_str, end_date_str):
+        cpu_data = dict()
+        ram_data = dict()
+        meta_data = dict()
+        all_data = dict()
+
+        start_date = datetime.date(*map(lambda x: int(x), start_date_str.split('-')))
+        end_date = datetime.date(*map(lambda x: int(x), end_date_str.split('-')))
+
+        interim_date = start_date
+        while interim_date != end_date + datetime.timedelta(1):
+
+            date_string = str(interim_date)
+            machines_list =  glob.glob(os.path.join(self._log_dir, date_string, "*"))
+            for path in machines_list:
+                machine_id = os.path.basename(path)
+                address = machine_id
+                if '@' in os.path.basename(path):
+                    address = os.path.basename(path).split('@')[-1]
+
+                hostname = "-"
+                try:
+                    with open(os.path.join(path, "hostname.txt"), 'r') as f:
+                        hostname = f.read().strip()
+                except Exception as e:
+                    hostname="-"
+
+                if address not in cpu_data:
+                    cpu_data[address] = dict()
+
+                if address not in ram_data:
+                    ram_data[address] = dict()
+
+                try:
+                    with open(os.path.join(path, "avg-cpu-usage.txt"), 'r') as f:
+                        cpu_data[address][date_string] = float(f.read().strip())
+                except:
+                    cpu_data[address][date_string] = 0
+
+                try:
+                    with open(os.path.join(path, "avg-mem-usage.txt"), 'r') as f:
+                        ram_data[address][date_string] = float(f.read().strip())
+                except:
+                    ram_data[address][date_string] = 0
+
+                meta_data[address] = {'hostname': hostname}
+
+            interim_date += datetime.timedelta(1)
+
+        for address in cpu_data:
+            all_data[meta_data[address]['hostname']+'@'+address] = {'CPU':statistics.mean(list(cpu_data[address].values())),
+                                                                    'RAM':statistics.mean(list(ram_data[address].values()))}
+
+        return all_data

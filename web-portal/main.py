@@ -75,6 +75,13 @@ def get_live_ssh_test_other_machines(IP, username, password):
     return {IP:ssh_successful}
 
 
+@app.route("/api/v1/get-avg-cpu-ram/<string:start_date>/<string:end_date>",
+           methods=['GET'])
+def get_avgusage_stats(start_date, end_date):
+    average_stats = util_obj.get_average_stats(start_date, end_date)
+    return average_stats
+
+
 @app.route("/")
 def index():
     return render_template("index.html", backend_url=backend_url)
