@@ -16,6 +16,16 @@ function openTab(evt, tabName) {
     if (other_machine_live_ssh_check_div != null){
 	other_machine_live_ssh_check_div.remove();
     }
+
+    var aggregate_fill_options_div = document.getElementById('aggregate-fill-options-div');
+    if (aggregate_fill_options_div != null){
+	aggregate_fill_options_div.remove();
+    }
+
+    var systems_rank_table = document.getElementById('systems-rank-table');
+    if (systems_rank_table != null){
+	systems_rank_table.remove();
+    }
     
     var date_div_elems = document.getElementsByClassName("date-div");
     for (i=0; i<date_div_elems.length; i++) {
@@ -514,8 +524,225 @@ function _AggregateTabSelected()
     for (i=0; i<system_names_elems_c.length; i++) {
 	system_names_elems_c[i].style.visibility = "hidden";
     }
-    document.getElementById("Aggregate").style.visibility = "hidden";
+    document.getElementById("Aggregate").style.visibility = "visible";
+
+    var aggregate_fill_options_div = document.createElement('div');
+    aggregate_fill_options_div.id = 'aggregate-fill-options-div';
+    document.getElementsByClassName('main-space-div')[0].appendChild(aggregate_fill_options_div);
+    aggregate_fill_options_div.style.backgroundColor = 'transparent';//'hsla(210, 20%, 50%, 0.2)';
+    aggregate_fill_options_div.style.position = 'relative';
+    aggregate_fill_options_div.style.top = '5%';
+    aggregate_fill_options_div.style.left = '3%';
+    aggregate_fill_options_div.style.height = '77%'
+    aggregate_fill_options_div.style.width = '30%';
+
+    var aggregate_from_date_title = document.createElement('div');
+    aggregate_from_date_title.id = 'aggregate-from-date-title';
+    document.getElementById('aggregate-fill-options-div').appendChild(aggregate_from_date_title);
+    aggregate_from_date_title.style.backgroundColor = 'transparent';
+    aggregate_from_date_title.style.position = 'relative';
+    aggregate_from_date_title.style.top = '3%';
+    aggregate_from_date_title.style.left = '-65%';
+    aggregate_from_date_title.style.height = '13%';
+    aggregate_from_date_title.innerHTML = " From Date:";
+    aggregate_from_date_title.style.color = '#064771';
+    aggregate_from_date_title.style.fontFamily = "Avantgarde, 'TeX Gyre Adventor', 'URW Gothic L', sans-serif";
+    aggregate_from_date_title.style.fontSize =  '16px';
+    aggregate_from_date_title.style.fontWeight = '600';
+    aggregate_from_date_title.style.textAlign = 'right';
+    aggregate_from_date_title.style.fontVariant = 'small-caps';
+
+    var aggregate_from_date_input = document.createElement("INPUT");
+    aggregate_from_date_input.setAttribute("type", "date");
+    aggregate_from_date_input.id = 'aggregate-from-date-input';
+    //aggregate_from_date_input.setAttribute("value", "2014-02-09");
+    document.getElementById('aggregate-fill-options-div').appendChild(aggregate_from_date_input);
+    aggregate_from_date_input.style.position = 'relative';
+    aggregate_from_date_input.style.top = '-13%';
+    aggregate_from_date_input.style.left = '-13%';
+    aggregate_from_date_input.style.height = '9%';
+
+    var yesterday_date = new Date(new Date().setDate(new Date().getDate()-1));
+    var week_back_date = new Date(new Date().setDate(new Date().getDate()-7));
+    var min_date = new Date(new Date().setDate(new Date().getDate()-30));
+    var max_date = yesterday_date;
     
+    aggregate_from_date_input.value = week_back_date.toISOString().substr(0, 10);
+    aggregate_from_date_input.min = min_date.toISOString().substr(0, 10);
+    aggregate_from_date_input.max = max_date.toISOString().substr(0, 10);
+
+    var aggregate_to_date_title = document.createElement('div');
+    aggregate_to_date_title.id = 'aggregate-to-date-title';
+    document.getElementById('aggregate-fill-options-div').appendChild(aggregate_to_date_title);
+    aggregate_to_date_title.style.backgroundColor = 'transparent';
+    aggregate_to_date_title.style.position = 'relative';
+    aggregate_to_date_title.style.top = '-7%';
+    aggregate_to_date_title.style.left = '-65%';
+    aggregate_to_date_title.style.height = '13%';
+    aggregate_to_date_title.innerHTML = " To Date:";
+    aggregate_to_date_title.style.color = '#064771';
+    aggregate_to_date_title.style.fontFamily = "Avantgarde, 'TeX Gyre Adventor', 'URW Gothic L', sans-serif";
+    aggregate_to_date_title.style.fontSize =  '16px';
+    aggregate_to_date_title.style.fontWeight = '600';
+    aggregate_to_date_title.style.textAlign = 'right';
+    aggregate_to_date_title.style.fontVariant = 'small-caps';
+
+    var aggregate_to_date_input = document.createElement("INPUT");
+    aggregate_to_date_input.id = 'aggregate-to-date-input';
+    aggregate_to_date_input.setAttribute("type", "date");
+    document.getElementById('aggregate-fill-options-div').appendChild(aggregate_to_date_input);
+    aggregate_to_date_input.style.position = 'relative';
+    aggregate_to_date_input.style.top = '-23%';
+    aggregate_to_date_input.style.left = '-13%';
+    aggregate_to_date_input.style.height = '9%';
+    aggregate_to_date_input.style.width = '37%';
+
+    aggregate_to_date_input.value = yesterday_date.toISOString().substr(0, 10);
+    aggregate_to_date_input.min = min_date.toISOString().substr(0, 10);
+    aggregate_to_date_input.max = max_date.toISOString().substr(0, 10);
+
+    var aggregate_parameter_title = document.createElement('div');
+    aggregate_parameter_title.id = 'aggregate-parameter-title';
+    document.getElementById('aggregate-fill-options-div').appendChild(aggregate_parameter_title);
+    aggregate_parameter_title.style.backgroundColor = 'transparent';
+    aggregate_parameter_title.style.position = 'relative';
+    aggregate_parameter_title.style.top = '-18%';
+    aggregate_parameter_title.style.left = '-65%';
+    aggregate_parameter_title.style.height = '13%';
+    aggregate_parameter_title.innerHTML = "Parameter:";
+    aggregate_parameter_title.style.color = '#064771';
+    aggregate_parameter_title.style.fontFamily = "Avantgarde, 'TeX Gyre Adventor', 'URW Gothic L', sans-serif";
+    aggregate_parameter_title.style.fontSize =  '16.5px';
+    aggregate_parameter_title.style.fontWeight = '600';
+    aggregate_parameter_title.style.textAlign = 'right';
+    aggregate_parameter_title.style.fontVariant = 'small-caps';
+
+    var aggregate_parameter_select = document.createElement('select');
+    aggregate_parameter_select.id = 'aggregate-parameter-select';
+    document.getElementById('aggregate-fill-options-div').appendChild(aggregate_parameter_select);
+    aggregate_parameter_select.style.position = 'relative';
+    aggregate_parameter_select.style.top = '-35%';
+    aggregate_parameter_select.style.left = '37%';
+    aggregate_parameter_select.style.height = '10%';
+    aggregate_parameter_select.style.width = '55%';
+    var aggregate_parameter_CPU_option = new Option('CPU Utilization %', 'CPU', false, false);
+    aggregate_parameter_select.appendChild(aggregate_parameter_CPU_option);
+    var aggregate_parameter_RAM_option = new Option('RAM Utilization %', 'RAM', false, false);
+    aggregate_parameter_select.appendChild(aggregate_parameter_RAM_option);
+    var aggregate_parameter_CPUAndRAM_option = new Option('CPU & RAM Utilization %', 'CPU-RAM', false, false);
+    aggregate_parameter_select.appendChild(aggregate_parameter_CPUAndRAM_option);
+
+    var aggregate_generate_system_ranking_btn = document.createElement("BUTTON");
+    var aggregate_generate_system_ranking_btn_text = document.createTextNode("Generate Systems Ranking");
+    aggregate_generate_system_ranking_btn.appendChild(aggregate_generate_system_ranking_btn_text);
+    document.getElementById('aggregate-fill-options-div').appendChild(aggregate_generate_system_ranking_btn);
+    aggregate_generate_system_ranking_btn.style.backgroundColor = 'hsla(210, 20%, 50%, 0.3)';
+    aggregate_generate_system_ranking_btn.style.position = 'relative';
+    aggregate_generate_system_ranking_btn.style.top = '-30%';
+    aggregate_generate_system_ranking_btn.style.left = '20%';
+    aggregate_generate_system_ranking_btn.style.height = '9.5%';
+    aggregate_generate_system_ranking_btn.style.color = '#064771';
+    aggregate_generate_system_ranking_btn.style.fontFamily = "Avantgarde, 'TeX Gyre Adventor', 'URW Gothic L', sans-serif";
+    aggregate_generate_system_ranking_btn.style.fontSize =  '15px';
+    aggregate_generate_system_ranking_btn.style.fontWeight = '700';
+    aggregate_generate_system_ranking_btn.style.textAlign = 'center';
+    aggregate_generate_system_ranking_btn.onclick = _AggregateGenerateSystemRankingBtnClicked;
+}
+
+function _AggregateGenerateSystemRankingBtnClicked()
+{
+    console.log('_AggregateGenerateSystemRankingBtnClicked');
+    var systems_rank_table = document.getElementById('systems-rank-table');
+    if (systems_rank_table != null){
+	systems_rank_table.remove();
+    }
+    var from_date = document.getElementById('aggregate-from-date-input').value;
+    var to_date = document.getElementById('aggregate-to-date-input').value;
+    var parameter = document.getElementById('aggregate-parameter-select').value;
+    console.log(from_date, to_date, parameter);
+    _AggregateGenerateSystemRankingWaitingResponse();
+}
+
+function _AggregateGenerateSystemRankingWaitingResponse()
+{
+    var util_response = {'hostname@10.10.3.183':{'CPU': 80.12, 'RAM': 20.1},'hostname1@10.10.3.133':{'CPU': 87.12, 'RAM': 93.45},'casandra@10.10.3.38':{'CPU': 8.12, 'RAM': 99.1}};
+    _AggregateGenerateSystemRankingRecievedResponse(util_response);
+}
+
+function _AggregateGenerateSystemRankingRecievedResponse(util_response){
+    var parameter = document.getElementById('aggregate-parameter-select').value;
+    var hostnameATaddress = Object.keys(util_response);
+    for(var i=0; i<hostnameATaddress.length; i++){
+	util_response[hostnameATaddress[i]]['CPU-RAM'] = (util_response[hostnameATaddress[i]]['CPU']+util_response[hostnameATaddress[i]]['RAM'])/2;
+    }
+    var items = Object.keys(util_response).map(function(key) {
+	return [key, util_response[key]['CPU'], util_response[key]['RAM'], util_response[key]['CPU-RAM']];
+    });
+    if( parameter == 'CPU'){
+	items.sort(function(first, second) {
+	    return second[1] - first[1];
+	});
+    }
+    else if( parameter == 'RAM'){
+	items.sort(function(first, second) {
+	    return second[2] - first[2];
+	});
+    }
+    else if( parameter == 'CPU-RAM'){
+	items.sort(function(first, second) {
+	    return second[3] - first[3];
+	});
+    }
+
+    var arrHead = new Array();
+    arrHead = ['Ranking', 'IP Address', 'Hostname', 'CPU Utilization', 'RAM Utilization'];
+
+    var systems_rank_table = document.createElement('table');
+    systems_rank_table.setAttribute('id', 'systems-rank-table');
+    document.getElementById('Aggregate').appendChild(systems_rank_table);
+    systems_rank_table_caption = document.getElementById('systems-rank-table').createCaption();
+    systems_rank_table_caption.innerHTML = "<span style='font-size: 18px; color: #064769; font-family: Monospace; font-variant: small-caps; font-weight: 700;'>" + "Aggregate System Utilization Ranking:<br><br>";
+    var systems_rank_tr = systems_rank_table.insertRow(-1);
+
+    //table header
+    for(var h=0; h<arrHead.length; h++){
+	var systems_rank_th = document.createElement('th');
+	systems_rank_th.innerHTML = "<span style='font-size: 15px; color: #064769; font-family: Monospace;'>" + "  "+arrHead[h]+"  ";
+	systems_rank_tr.appendChild(systems_rank_th);
+    }
+
+    for(var c=0; c<items.length; c++){
+	systems_rank_tr = systems_rank_table.insertRow(-1);
+
+	var td_1 = document.createElement('td');
+	td_1 = systems_rank_tr.insertCell(-1);
+	td_1.innerHTML = "<span style='font-size: 13px; color: #145a32; font-family: Monospace;text-align: center; display:block;'>" + (c+1).toString();
+	systems_rank_tr.appendChild(td_1);
+
+	var item_hostnameATaddress = items[c][0].split("@");
+
+	var td_2 = document.createElement('td');
+	td_2 = systems_rank_tr.insertCell(-1);
+	td_2.innerHTML = "<span style='font-size: 13px; color: #145a32; font-family: Monospace;text-align: center; display:block;'>" + item_hostnameATaddress[1];
+	systems_rank_tr.appendChild(td_2);
+
+	var td_3 = document.createElement('td');
+	td_3 = systems_rank_tr.insertCell(-1);
+	td_3.innerHTML = "<span style='font-size: 13px; color: #145a32; font-family: Monospace;text-align: center; display:block;'>" + item_hostnameATaddress[0];
+	systems_rank_tr.appendChild(td_3);
+
+	var td_4 = document.createElement('td');
+	td_4 = systems_rank_tr.insertCell(-1);
+	td_4.innerHTML = "<span style='font-size: 13px; color: #145a32; font-family: Monospace;text-align: center; display:block;'>" + items[c][1].toString() + "%";
+	systems_rank_tr.appendChild(td_4);
+
+	var td_5 = document.createElement('td');
+	td_5 = systems_rank_tr.insertCell(-1);
+	td_5.innerHTML = "<span style='font-size: 13px; color: #145a32; font-family: Monospace;text-align: center; display:block;'>" + items[c][2].toString() + "%";
+	systems_rank_tr.appendChild(td_5);
+    }
+    document.getElementById("Aggregate").appendChild(systems_rank_table);
+    document.getElementById('systems-rank-table').border=1;
 }
 
 function _FillSystemNamesContainer()
