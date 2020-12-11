@@ -1,3 +1,3 @@
 #!/bin/sh
 
-ssh "${1}" "hostname"
+ssh -o PasswordAuthentication=no "${1}" "hostname"
