@@ -26,11 +26,11 @@ main()
 	    bash "${LMON_HOME}"/data-collection/utils/cpu-usage.sh "${HOST}" > "${HOSTPATH}"/cpu-usage.csv < /dev/null;
 	    if [ $? -ne 0 ]; then rm -f "${HOSTPATH}"/cpu-usage.csv; touch "${HOSTPATH}"/cpu-test-down; fi
 	    bash "${LMON_HOME}"/data-collection/utils/mem-usage.sh "${HOST}" > "${HOSTPATH}"/mem-usage.csv < /dev/null;
-	    if [ $? -ne 0 ]; then rm -f "${HOSTPATH}"/cpu-usage.csv; touch "${HOSTPATH}"/mem-test-down; fi
+	    if [ $? -ne 0 ]; then rm -f "${HOSTPATH}"/mem-usage.csv; touch "${HOSTPATH}"/mem-test-down; fi
 	    bash "${LMON_HOME}"/data-collection/utils/last-login-info.sh "${HOST}" > "${HOSTPATH}"/last_login_info.txt < /dev/null;
-	    if [ $? -ne 0 ]; then rm -f "${HOSTPATH}"/cpu-usage.csv; touch "${HOSTPATH}"/last-login-test-down; fi
+	    if [ $? -ne 0 ]; then rm -f "${HOSTPATH}"/last_login_info.txt; touch "${HOSTPATH}"/last-login-test-down; fi
 	    bash "${LMON_HOME}"/data-collection/utils/hostname.sh "${HOST}" > "${HOSTPATH}"/hostname.txt < /dev/null;
-	    if [ $? -ne 0 ]; then rm -f "${HOSTPATH}"/cpu-usage.csv; touch "${HOSTPATH}"/hostname-test-down; fi
+	    if [ $? -ne 0 ]; then rm -f "${HOSTPATH}"/hostname.txt; touch "${HOSTPATH}"/hostname-test-down; fi
 	else
 	    echo "Unable to remotely login to host - ${HOST}";
 	    touch "${HOSTPATH}"/ssh-down;
