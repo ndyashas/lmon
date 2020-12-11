@@ -5,4 +5,4 @@ ssh -o PasswordAuthentication=no "${1}" "LC_TIME='POSIX' sar -r -1" | \
         -e 's/\(.*CPU.*\)//g' \
 	-e 's/\(.*commit.*\)//g' \
 	-e '/^$/d' | \
-    awk 'OFS="," {print $1,$9}'
+    awk 'OFS="," {print $1,$9}'; ( exit ${PIPESTATUS[0]} )
