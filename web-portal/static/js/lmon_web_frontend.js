@@ -23,11 +23,25 @@ function openTab(evt, tabName) {
     }
     var system_names_elems = document.getElementsByClassName("system-names-titles-div");
     for (i=0; i<system_names_elems.length; i++) {
-	system_names_elems[i].style.display = "block";
+    	system_names_elems[i].style.display = "block";
     }
     var system_names_elems_c = document.getElementsByClassName("system-names-container-div");
     for (i=0; i<system_names_elems_c.length; i++) {
-	system_names_elems_c[i].style.display = "block";
+    	system_names_elems_c[i].style.display = "block";
+    }
+
+     var date_div_elems = document.getElementsByClassName("date-div");
+    for (i=0; i<date_div_elems.length; i++) {
+	date_div_elems[i].style.visibility = "visible";
+    }
+
+    var system_names_elems = document.getElementsByClassName("system-names-titles-div");
+    for (i=0; i<system_names_elems.length; i++) {
+    	system_names_elems[i].style.visibility = 'visible';
+    }
+    var system_names_elems_c = document.getElementsByClassName("system-names-container-div");
+    for (i=0; i<system_names_elems_c.length; i++) {
+    	system_names_elems_c[i].style.visibility = 'visible';
     }
     
     // Get all elements with class="tabcontent" and hide them
