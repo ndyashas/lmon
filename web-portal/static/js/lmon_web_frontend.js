@@ -164,7 +164,7 @@ function _FillSSHData_internal(failed_ssh, success_ssh)
 	document.getElementById("SSH").appendChild(failed_ssh_table);
 	//console.log(document.getElementById('failed_ssh_table'));
 	var failed_ssh_caption = document.getElementById('failed_ssh_table').createCaption();
-	failed_ssh_caption.innerHTML = "<span style='font-size: 18px; color: #000080; font-family: Monospace;'>" + "SSH failed for:<br>";
+	failed_ssh_caption.innerHTML = "<span style='font-size: 18px; color: #064769; font-family: Monospace; font-variant: small-caps; font-weight: 700;'>" + "SSH failed for:<br>";
 	var failed_ssh_tr = failed_ssh_table.insertRow(-1);
 
 	//table header
@@ -227,7 +227,7 @@ function _FillSSHData_internal(failed_ssh, success_ssh)
 	success_ssh_table.setAttribute('id', 'success_ssh_table');
 	document.getElementById("SSH").appendChild(success_ssh_table);
 	var success_ssh_caption = document.getElementById('success_ssh_table').createCaption();
-	success_ssh_caption.innerHTML = "<span style='font-size: 18px; color: #000080; font-family: Monospace;'>" + "<br>SSH succeeded for:<br>";
+	success_ssh_caption.innerHTML = "<span style='font-size: 18px; color: #064769; font-family: Monospace; font-variant: small-caps; font-weight: 700;'>" + "<br>SSH succeeded for:<br>";
 	var success_ssh_tr = success_ssh_table.insertRow(-1);
 
 	//table header
@@ -244,22 +244,22 @@ function _FillSSHData_internal(failed_ssh, success_ssh)
 	    
 	    var td_1 = document.createElement('td');
 	    td_1 = success_ssh_tr.insertCell(-1);
-	    td_1.innerHTML = "<span style='font-size: 13px; color: #28b463; font-family: Monospace;text-align: center; display:block;'>" + (c+1).toString();
+	    td_1.innerHTML = "<span style='font-size: 13px; color: #006400; font-family: Monospace;text-align: center; display:block;'>" + (c+1).toString();
 	    success_ssh_tr.appendChild(td_1);
 	    
 	    var td_2 = document.createElement('td');
 	    td_2 = success_ssh_tr.insertCell(-1);
-	    td_2.innerHTML = "<span style='font-size: 13px; color: #28b463; font-family: Monospace;text-align: center; display:block;'>" + success_IPs[c];
+	    td_2.innerHTML = "<span style='font-size: 13px; color:#006400; font-family: Monospace;text-align: center; display:block;'>" + success_IPs[c];
 	    success_ssh_tr.appendChild(td_2);
 	    
 	    var td_3 = document.createElement('td');
 	    td_3 = success_ssh_tr.insertCell(-1);
-	    td_3.innerHTML = "<span style='font-size: 13px; color: #28b463; font-family: Monospace;text-align: center; display:block;'>" + success_ssh[success_IPs[c]]["hostname"];
+	    td_3.innerHTML = "<span style='font-size: 13px; color: #006400; font-family: Monospace;text-align: center; display:block;'>" + success_ssh[success_IPs[c]]["hostname"];
 	    success_ssh_tr.appendChild(td_3);
 	    
 	    var td_4 = document.createElement('td');
 	    td_4 = success_ssh_tr.insertCell(-1);
-	    td_4.innerHTML = "<span style='font-size: 13px; color: #28b463; font-family: Monospace;text-align: center; display:block;'>" + success_ssh[success_IPs[c]]["user"];
+	    td_4.innerHTML = "<span style='font-size: 13px; color: #006400; font-family: Monospace;text-align: center; display:block;'>" + success_ssh[success_IPs[c]]["user"];
 	    success_ssh_tr.appendChild(td_4);
 	    
 	    var td_5 = document.createElement('td');
