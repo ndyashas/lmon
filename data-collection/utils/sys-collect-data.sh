@@ -25,8 +25,12 @@ main()
 	    fi
 	    bash "${LMON_HOME}"/data-collection/utils/cpu-usage.sh "${HOST}" > "${HOSTPATH}"/cpu-usage.csv < /dev/null;
 	    if [ $? -ne 0 ]; then rm -f "${HOSTPATH}"/cpu-usage.csv; touch "${HOSTPATH}"/cpu-test-down; fi
+	    bash "${LMON_HOME}"/data-collection/utils/avg-cpu-usage.sh "${HOST}" > "${HOSTPATH}"/avg-cpu-usage.txt < /dev/null;
+	    if [ $? -ne 0 ]; then rm -f "${HOSTPATH}"/avg-cpu-usage.txt; touch "${HOSTPATH}"/avg-cpu-usage-down; fi
 	    bash "${LMON_HOME}"/data-collection/utils/mem-usage.sh "${HOST}" > "${HOSTPATH}"/mem-usage.csv < /dev/null;
 	    if [ $? -ne 0 ]; then rm -f "${HOSTPATH}"/mem-usage.csv; touch "${HOSTPATH}"/mem-test-down; fi
+	    bash "${LMON_HOME}"/data-collection/utils/avg-mem-usage.sh "${HOST}" > "${HOSTPATH}"/avg-mem-usage.txt < /dev/null;
+	    if [ $? -ne 0 ]; then rm -f "${HOSTPATH}"/avg-mem-usage.txt; touch "${HOSTPATH}"/avg-mem-usage-down; fi
 	    bash "${LMON_HOME}"/data-collection/utils/last-login-info.sh "${HOST}" > "${HOSTPATH}"/last_login_info.txt < /dev/null;
 	    if [ $? -ne 0 ]; then rm -f "${HOSTPATH}"/last_login_info.txt; touch "${HOSTPATH}"/last-login-test-down; fi
 	    bash "${LMON_HOME}"/data-collection/utils/hostname.sh "${HOST}" > "${HOSTPATH}"/hostname.txt < /dev/null;
