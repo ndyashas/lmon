@@ -3,6 +3,9 @@ var CPU_ydata = {};
 var RAM_ydata = {};
 var Logins_data = {};
 var MachineId_IpHostname = {};
+var Aggregate_prev_from_date = "";
+var Aggregate_prev_to_date = "";
+var util_response = {};
 
 function InAggregate_openTab(event, subTabName){
     console.log(subTabName);
@@ -660,20 +663,29 @@ function _AggregateGenerateSystemRankingBtnClicked()
     var to_date = document.getElementById('aggregate-to-date-input').value;
     var parameter = document.getElementById('aggregate-parameter-select').value;
     console.log(from_date, to_date, parameter);
-    _AggregateGenerateSystemRankingWaitingResponse();
+    //make request to backend only if the aggregation period is changed, or else re-use the data
+    if((Aggregate_prev_from_date != from_date) || (Aggregate_prev_to_date != to_date)){
+	 _AggregateGenerateSystemRankingWaitingResponse();
+    }
+    else {
+	_AggregateGenerateSystemRankingRecievedResponse(false,util_response);
+    }
+    
 }
 
 function _AggregateGenerateSystemRankingWaitingResponse()
 {
-    var util_response = {'hostname@10.10.3.183':{'CPU': 80.12, 'RAM': 20.1},'hostname1@10.10.3.133':{'CPU': 87.12, 'RAM': 93.45},'casandra@10.10.3.38':{'CPU': 8.12, 'RAM': 99.1}};
-    _AggregateGenerateSystemRankingRecievedResponse(util_response);
+    util_response = {'hostname@10.10.3.183':{'CPU': 80.12, 'RAM': 20.1},'hostname1@10.10.3.133':{'CPU': 87.12, 'RAM': 93.45},'casandra@10.10.3.38':{'CPU': 8.12, 'RAM': 99.1}};
+    _AggregateGenerateSystemRankingRecievedResponse(true, util_response);
 }
 
-function _AggregateGenerateSystemRankingRecievedResponse(util_response){
+function _AggregateGenerateSystemRankingRecievedResponse(from_new_request, util_response){
     var parameter = document.getElementById('aggregate-parameter-select').value;
     var hostnameATaddress = Object.keys(util_response);
-    for(var i=0; i<hostnameATaddress.length; i++){
-	util_response[hostnameATaddress[i]]['CPU-RAM'] = (util_response[hostnameATaddress[i]]['CPU']+util_response[hostnameATaddress[i]]['RAM'])/2;
+    if(from_new_request == true){
+	for(var i=0; i<hostnameATaddress.length; i++){
+	    util_response[hostnameATaddress[i]]['CPU-RAM'] = (util_response[hostnameATaddress[i]]['CPU']+util_response[hostnameATaddress[i]]['RAM'])/2;
+	}
     }
     var items = Object.keys(util_response).map(function(key) {
 	return [key, util_response[key]['CPU'], util_response[key]['RAM'], util_response[key]['CPU-RAM']];
