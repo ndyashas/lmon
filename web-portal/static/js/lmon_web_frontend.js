@@ -665,7 +665,10 @@ function _AggregateGenerateSystemRankingBtnClicked()
     console.log(from_date, to_date, parameter);
     //make request to backend only if the aggregation period is changed, or else re-use the data
     if((Aggregate_prev_from_date != from_date) || (Aggregate_prev_to_date != to_date)){
-	 _AggregateGenerateSystemRankingWaitingResponse();
+	xhr_object = new XMLHttpRequest();
+	xhr_object.onload = _AggregateGenerateSystemRankingWaitingResponse;
+	xhr_object.open('GET', 'http://'+document.BACKEND_URL+'/api/v1/get-avg-cpu-ram/'+ from_date + "/" + to_date);
+	xhr_object.send();
     }
     else {
 	_AggregateGenerateSystemRankingRecievedResponse(false,util_response);
@@ -675,8 +678,13 @@ function _AggregateGenerateSystemRankingBtnClicked()
 
 function _AggregateGenerateSystemRankingWaitingResponse()
 {
-    util_response = {'hostname@10.10.3.183':{'CPU': 80.12, 'RAM': 20.1},'hostname1@10.10.3.133':{'CPU': 87.12, 'RAM': 93.45},'casandra@10.10.3.38':{'CPU': 8.12, 'RAM': 99.1}};
-    _AggregateGenerateSystemRankingRecievedResponse(true, util_response);
+    //util_response = {'hostname@10.10.3.183':{'CPU': 80.12, 'RAM': 20.1},'hostname1@10.10.3.133':{'CPU': 87.12, 'RAM': 93.45},'casandra@10.10.3.38':{'CPU': 8.12, 'RAM': 99.1}};
+    if (this.readyState == 4 && this.status == 200)
+    {
+	var res = this.responseText;
+	var util_response = JSON.parse(res);
+	_AggregateGenerateSystemRankingRecievedResponse(true, util_response);
+    }
 }
 
 function _AggregateGenerateSystemRankingRecievedResponse(from_new_request, util_response){
@@ -745,12 +753,12 @@ function _AggregateGenerateSystemRankingRecievedResponse(from_new_request, util_
 
 	var td_4 = document.createElement('td');
 	td_4 = systems_rank_tr.insertCell(-1);
-	td_4.innerHTML = "<span style='font-size: 13px; color: #145a32; font-family: Monospace;text-align: center; display:block;'>" + items[c][1].toString() + "%";
+	td_4.innerHTML = "<span style='font-size: 13px; color: #145a32; font-family: Monospace;text-align: center; display:block;'>" + items[c][1].toFixed(2).toString() + "%";
 	systems_rank_tr.appendChild(td_4);
 
 	var td_5 = document.createElement('td');
 	td_5 = systems_rank_tr.insertCell(-1);
-	td_5.innerHTML = "<span style='font-size: 13px; color: #145a32; font-family: Monospace;text-align: center; display:block;'>" + items[c][2].toString() + "%";
+	td_5.innerHTML = "<span style='font-size: 13px; color: #145a32; font-family: Monospace;text-align: center; display:block;'>" + items[c][2].toFixed(2).toString() + "%";
 	systems_rank_tr.appendChild(td_5);
     }
     document.getElementById("Aggregate").appendChild(systems_rank_table);
