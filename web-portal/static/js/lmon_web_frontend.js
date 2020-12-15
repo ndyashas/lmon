@@ -333,8 +333,8 @@ function _SSHTabSelected()
     document.getElementById('other-machine-live-ssh-check-div').appendChild(other_machine_live_ssh_check_title);
     other_machine_live_ssh_check_title.style.backgroundColor = 'transparent';
     other_machine_live_ssh_check_title.style.position = 'relative';
-    other_machine_live_ssh_check_title.style.top = '5%';
-    other_machine_live_ssh_check_title.style.left = '-30%';
+    other_machine_live_ssh_check_title.style.top = '-75%';
+    other_machine_live_ssh_check_title.style.left = '-2%';
     other_machine_live_ssh_check_title.style.height = '10%';
     other_machine_live_ssh_check_title.style.width = '100%';
     other_machine_live_ssh_check_title.innerHTML = " Live SSH Check";
@@ -351,7 +351,7 @@ function _SSHTabSelected()
     document.getElementById('other-machine-live-ssh-check-div').appendChild(ssh_IP_title);
     ssh_IP_title.style.backgroundColor = 'transparent';
     ssh_IP_title.style.position = 'relative';
-    ssh_IP_title.style.top = '13%';
+    ssh_IP_title.style.top = '-60%';
     ssh_IP_title.style.left = '-65%';
     ssh_IP_title.style.height = '9%';
     ssh_IP_title.innerHTML = " IP Address:";
@@ -366,7 +366,7 @@ function _SSHTabSelected()
     document.getElementById('other-machine-live-ssh-check-div').appendChild(ssh_username_title);
     ssh_username_title.style.backgroundColor = 'transparent';
     ssh_username_title.style.position = 'relative';
-    ssh_username_title.style.top = '23%';
+    ssh_username_title.style.top = '-41%';
     ssh_username_title.style.left = '-65%';
     ssh_username_title.style.height = '9%';
     ssh_username_title.innerHTML = " Username:";
@@ -381,7 +381,7 @@ function _SSHTabSelected()
     document.getElementById('other-machine-live-ssh-check-div').appendChild(ssh_password_title);
     ssh_password_title.style.backgroundColor = 'transparent';
     ssh_password_title.style.position = 'relative';
-    ssh_password_title.style.top = '33%';
+    ssh_password_title.style.top = '-22%';
     ssh_password_title.style.left = '-65%';
     ssh_password_title.style.height = '9%';
     ssh_password_title.innerHTML = " Password:";
