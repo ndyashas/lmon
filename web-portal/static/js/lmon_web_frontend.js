@@ -546,9 +546,10 @@ function _AggregateTabSelected()
     document.getElementById('aggregate-fill-options-div').appendChild(aggregate_from_date_title);
     aggregate_from_date_title.style.backgroundColor = 'transparent';
     aggregate_from_date_title.style.position = 'relative';
-    aggregate_from_date_title.style.top = '3%';
-    aggregate_from_date_title.style.left = '-65%';
+    aggregate_from_date_title.style.top = '-63%';
+    aggregate_from_date_title.style.left = '-15%';
     aggregate_from_date_title.style.height = '13%';
+    aggregate_from_date_title.style.width = '50%';
     aggregate_from_date_title.innerHTML = " From Date:";
     aggregate_from_date_title.style.color = '#064771';
     aggregate_from_date_title.style.fontFamily = "Avantgarde, 'TeX Gyre Adventor', 'URW Gothic L', sans-serif";
@@ -563,8 +564,8 @@ function _AggregateTabSelected()
     //aggregate_from_date_input.setAttribute("value", "2014-02-09");
     document.getElementById('aggregate-fill-options-div').appendChild(aggregate_from_date_input);
     aggregate_from_date_input.style.position = 'relative';
-    aggregate_from_date_input.style.top = '-13%';
-    aggregate_from_date_input.style.left = '-13%';
+    aggregate_from_date_input.style.top = '-66%';
+    aggregate_from_date_input.style.left = '37%';
     aggregate_from_date_input.style.height = '9%';
 
     var yesterday_date = new Date(new Date().setDate(new Date().getDate()-1));
@@ -581,7 +582,7 @@ function _AggregateTabSelected()
     document.getElementById('aggregate-fill-options-div').appendChild(aggregate_to_date_title);
     aggregate_to_date_title.style.backgroundColor = 'transparent';
     aggregate_to_date_title.style.position = 'relative';
-    aggregate_to_date_title.style.top = '-7%';
+    aggregate_to_date_title.style.top = '-59%';
     aggregate_to_date_title.style.left = '-65%';
     aggregate_to_date_title.style.height = '13%';
     aggregate_to_date_title.innerHTML = " To Date:";
@@ -597,8 +598,8 @@ function _AggregateTabSelected()
     aggregate_to_date_input.setAttribute("type", "date");
     document.getElementById('aggregate-fill-options-div').appendChild(aggregate_to_date_input);
     aggregate_to_date_input.style.position = 'relative';
-    aggregate_to_date_input.style.top = '-23%';
-    aggregate_to_date_input.style.left = '-13%';
+    aggregate_to_date_input.style.top = '-75%';
+    aggregate_to_date_input.style.left = '37%';
     aggregate_to_date_input.style.height = '9%';
     aggregate_to_date_input.style.width = '37%';
 
@@ -611,7 +612,7 @@ function _AggregateTabSelected()
     document.getElementById('aggregate-fill-options-div').appendChild(aggregate_parameter_title);
     aggregate_parameter_title.style.backgroundColor = 'transparent';
     aggregate_parameter_title.style.position = 'relative';
-    aggregate_parameter_title.style.top = '-18%';
+    aggregate_parameter_title.style.top = '-69%';
     aggregate_parameter_title.style.left = '-65%';
     aggregate_parameter_title.style.height = '13%';
     aggregate_parameter_title.innerHTML = "Parameter:";
@@ -626,7 +627,7 @@ function _AggregateTabSelected()
     aggregate_parameter_select.id = 'aggregate-parameter-select';
     document.getElementById('aggregate-fill-options-div').appendChild(aggregate_parameter_select);
     aggregate_parameter_select.style.position = 'relative';
-    aggregate_parameter_select.style.top = '-35%';
+    aggregate_parameter_select.style.top = '-84.5%';
     aggregate_parameter_select.style.left = '37%';
     aggregate_parameter_select.style.height = '10%';
     aggregate_parameter_select.style.width = '55%';
@@ -643,7 +644,7 @@ function _AggregateTabSelected()
     document.getElementById('aggregate-fill-options-div').appendChild(aggregate_generate_system_ranking_btn);
     aggregate_generate_system_ranking_btn.style.backgroundColor = 'hsla(210, 20%, 50%, 0.3)';
     aggregate_generate_system_ranking_btn.style.position = 'relative';
-    aggregate_generate_system_ranking_btn.style.top = '-30%';
+    aggregate_generate_system_ranking_btn.style.top = '-78%';
     aggregate_generate_system_ranking_btn.style.left = '20%';
     aggregate_generate_system_ranking_btn.style.height = '9.5%';
     aggregate_generate_system_ranking_btn.style.color = '#064771';
