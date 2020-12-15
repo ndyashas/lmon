@@ -809,14 +809,15 @@ function _FillSystemNamesContainer()
 }
 
 function CheckboxClicked(event)
-{    
+{
+    var max_allowable_ticks = 10;
     var checkbks_all = document.querySelectorAll("#system-names-container input[type='checkbox']");
     for(i=0; i<checkbks_all.length; i++)
 	{
 	    checkbks_all[i].disabled=false;
 	} 
     var checkbks = document.querySelectorAll("#system-names-container input[type='checkbox']:checked");
-    if(checkbks.length>=5)
+    if(checkbks.length>=max_allowable_ticks)
     {
 	var checkbks_to_disable = document.querySelectorAll("#system-names-container input[type='checkbox']:not(:checked)");
 	for(i=0; i<checkbks_to_disable.length; i++)
