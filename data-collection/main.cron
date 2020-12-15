@@ -2,4 +2,4 @@
 MAILTO=""
 
 # Run the data collection at 1am everyday
-0 1 * * * /usr/bin/bash $HOME/.lmon/data-collection/main.sh 1>/dev/null 2>&1
+0 1 * * * /bin/bash $HOME/.lmon/data-collection/main.sh 1>/dev/null 2>&1
